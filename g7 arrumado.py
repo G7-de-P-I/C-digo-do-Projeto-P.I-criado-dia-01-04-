@@ -2,6 +2,13 @@ pontos1=10
 pontos2=10
 pontos3=10
 pontos4=10
+
+
+
+# comentário adicionado para testar o commit no github
+
+
+
 def criar_lista_sustentabilidade():
     """Cria uma lista dos ní­veis de sustentabilidade."""
 
