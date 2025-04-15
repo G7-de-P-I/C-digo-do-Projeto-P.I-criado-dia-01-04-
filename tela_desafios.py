@@ -413,25 +413,11 @@ def Tela_desafio_transp():
              print("3 - Uso exclusivo e privado (trasnporte que utiliza combustíveis fósseis)")
              print("")
              
-             while True:
-                 try:
-                     meiotransp1 = int(input("\nSem gasto de combustíveis fósseis (a pé, bicicleta, patinete ou outro meio): "))
-                     break
-                 except ValueError:
-                     print("")
-                     print("Erro: Digite um número válido.")
+             
              
              while True:
                  try:
-                     meiotransp2 = int(input("\nComunitário (ônibus, carona ou outro meio): "))
-                     break
-                 except ValueError:
-                     print("")
-                     print("Erro: Digite um número válido.")
-             
-             while True:
-                 try:
-                     meiotransp3 = int(input("\nPrivado e combustíveis fósseis (carro): "))
+                     meiotransporte = int(input("Digite uma das opções: "))
                      break
                  except ValueError:
                      print("")
@@ -441,20 +427,23 @@ def Tela_desafio_transp():
              print("----------------------------------------------------------------------")
      
              # Nível de sustentabilidade para transporte
-             if meiotransp1 > meiotransp2 and meiotransp1 > meiotransp3:
+             if meiotransporte == 1:
                  transporte = "ALTA SUSTENTABILIDADE"
                  pontos4 = 10
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: ALTA SUSTENTABILIDADE")
                  
-             elif meiotransp2 > meiotransp1 and meiotransp2 > meiotransp3:
+                 
+                 
+             elif meiotransporte == 2:
                  transporte = "MODERADA SUSTENTABILIDADE"
                  pontos4 = 5
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: MODERADA SUSTENTABILIDADE")
                  
-             else:
+             elif meiotransporte == 3:
                  transporte = "BAIXA SUSTENTABILIDADE"
                  pontos4 = 2
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: BAIXA SUSTENTABILIDADE")
+                 
      
              print("--------------------------------------------------------------------")
              print("")
@@ -481,7 +470,7 @@ def Tela_desafio_transp():
              elif opcao10 == 2:
                  limpar_terminal()
                  Tela_menu()
-     
+    
     
 
 def Tela_de_nivel_diario():
