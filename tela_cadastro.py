@@ -19,7 +19,10 @@ def Tela_cadastro():
     nome = input("\n Nome: ")
     email = input("\n Email: ")
     cpf = int(input("\n CPF: "))
-    senha = input("\n Senha: ")
+    senha = input("\n Senha: ") 
+    
+    
+    
     
     try:
         conexao = conectar()
