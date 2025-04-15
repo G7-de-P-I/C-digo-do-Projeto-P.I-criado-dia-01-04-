@@ -22,11 +22,10 @@ def Tela_cadastro():
     senha = input("\n Senha: ") 
     
     
-    #pastel é bom
-    
     
     
     try:
+        #ele faz isso ...
         conexao = conectar()
         cursor = conexao.cursor()
         

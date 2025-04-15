@@ -406,14 +406,16 @@ def Tela_desafio_transp():
              print("")
              print("Qual meio de transporte você utilizou hoje?")
              print("")
-             print("Legenda:")
+             print("Escolha uma opção:")
              print("")
-             print("1 - Preencha com 1 se utilizou uma vez, com 2 se utilizou duas vezes e assim por diante")
-             print("2 - Preencha com 0 se não utilizou nenhuma vez o meio de transporte")
+             print("1 - Sem gasto de combustíveis fósseis (a pé, bicicleta, patinete ou outro meio)")
+             print("2 - Uso misto de transporte público e privado (ônibus, carona ou outro meio)")
+             print("3 - Uso exclusivo e privado (trasnporte que utiliza combustíveis fósseis)")
+             print("")
              
              while True:
                  try:
-                     meiotransp1 = int(input("\nSem gasto de energia elétrica (a pé, bicicleta, patinete ou outro meio): "))
+                     meiotransp1 = int(input("\nSem gasto de combustíveis fósseis (a pé, bicicleta, patinete ou outro meio): "))
                      break
                  except ValueError:
                      print("")
