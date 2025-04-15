@@ -17,8 +17,22 @@ def Tela_cadastro():
     print("------------------------------------------------------------------")
     
     nome = input("\n Nome: ")
-    email = input("\n Email: ")
-    cpf = int(input("\n CPF: "))
+    
+    
+    while True:
+        email = input("\nEmail: ")
+        if "@" in email and "." in email.split("@")[-1]:
+            break
+        else:
+            print("❌ Email inválido! Digite um email no formato correto (ex: nome@exemplo.com).")
+    
+    while True:
+        cpf = input("\nCPF (apenas números): ")
+        if len(cpf) == 11:
+            break
+        else:
+            print("❌ CPF inválido! Certifique-se de digitar 11 números.")
+
     senha = input("\n Senha: ") 
     
     
@@ -31,8 +45,6 @@ def Tela_cadastro():
         
         comando = "INSERT INTO usuario (nome, email, cpf, senha) VALUES (%s, %s, %s, %s)"
         valores = (nome, email, cpf, senha)
-        
-        print("\n[DEBUG] Dados sendo enviados:", valores)
         
         cursor.execute(comando, valores)
         conexao.commit()

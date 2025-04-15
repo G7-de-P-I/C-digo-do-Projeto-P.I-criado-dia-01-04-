@@ -19,39 +19,43 @@ def Tela_login():
             resposta = input("Possui cadastro?(SIM/NÃO): ")
             
             if(resposta == "SIM" or resposta == "sim" or resposta == "Sim"):
-                email = input("\nDigite seu email: ")
-                senha = input("Digite sua senha: ")
                 
-                conexao = None
-                cursos = None 
+                while True:
+                    email = input("\nDigite seu email: ")
+                    senha = input("Digite sua senha: ")
                 
-                try:
-                    conexao = conectar()
-                    cursor = conexao.cursor()
+                    conexao = None
+                    cursos = None 
+                
+                    try:
+                        conexao = conectar()
+                        cursor = conexao.cursor()
                     
-                    comando = "SELECT * FROM usuario WHERE email = %s AND senha = %s"
-                    valores = (email, senha)
+                        comando = "SELECT * FROM usuario WHERE email = %s AND senha = %s"
+                        valores = (email, senha)
                     
-                    cursor.execute(comando, valores)
-                    usuario = cursor.fetchone()
+                        cursor.execute(comando, valores)
+                        usuario = cursor.fetchone()
                     
-                    if usuario:
-                        from tela_menu import Tela_menu
-                        print("\n✅ Login realizado com sucesso!")
-                        input("\nPressione Enter para continuar...")
-                        limpar_terminal()
-                        Tela_menu(usuario)
-                    else:
-                        print("\n❌ Email ou senha incorretos!")
-                        input("\nPressione Enter para tentar novamente...")
-                        Tela_login()
-                except Exception as e:
+                        if usuario:
+                            from tela_menu import Tela_menu
+                            print("\n✅ Login realizado com sucesso!")
+                            input("\nPressione Enter para continuar...")
+                            limpar_terminal()
+                            Tela_menu(usuario)
+                            break
+                        else:
+                            print("\n❌ Email ou senha incorretos!")
+                            input("\nPressione Enter para tentar novamente...")
+                            
+                            
+                    except Exception as e:
                         print(f"\n⚠️ Erro ao fazer login: {e}")
-                finally:
-                    if cursor:
-                        cursor.close()
-                    if conexao:
-                        conexao.close()
+                    finally:
+                        if cursor:
+                            cursor.close()
+                        if conexao:
+                            conexao.close()
 
             else:
                 from tela_cadastro import Tela_cadastro
