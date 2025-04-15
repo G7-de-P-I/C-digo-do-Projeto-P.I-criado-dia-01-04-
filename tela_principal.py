@@ -145,20 +145,3 @@ def Tela_de_saida():
     print(" ")
     print("******************************************************************************")
     sys.exit()
-            
-    
-def Tela_perfil():
-    print("------------------------------------------------------------------")
-    print("PERFIL")
-    print("------------------------------------------------------------------")
-    
-    print("\nOlá [fulano], aqui estão alguns informações que podem ser úteis para você!!")
-    print("\nNível sustentável de hoje: ...")
-    print("\nNome: ...")
-    print("Email: ...")
-    print("Telefon: ...")
-    print("CPF: ...")
-    input("\nPara VOLTAR pressione Enter")
-    limpar_terminal()
-    from tela_menu import Tela_menu
-    Tela_menu()
