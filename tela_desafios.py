@@ -1,4 +1,5 @@
 import os
+from banco import conectar
 
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -46,7 +47,11 @@ def Tela_desafio():
 
 
 def Tela_desafio_energ():
+     
      from tela_menu import Tela_menu
+     cursor = None
+     conexao = None
+
      desafio1 = 3
          
      # DESAFIO 3 - ENERGIA
@@ -89,6 +94,25 @@ def Tela_desafio_energ():
              energia = "BAIXA SUSTENTABILIDADE"
              pontos3 = 2
              print("Seu nível no DESAFIO 3 - ENERGIA É: BAIXA SUSTENTABILIDADE")
+
+         try:
+             conexao = conectar()
+             cursor = conexao.cursor()
+
+             comando = "INSERT INTO tabela_desafios (desa_enrgia) values (%s)"
+             valor = (kwh)
+
+             cursor.execute(comando,valor)
+             conexao.commit()
+
+             print("\n✅ Inserção de informação realizado com sucesso!")
+         except Exception as e:
+             print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
+         finally:
+             if cursor:
+                 cursor.close()
+             if conexao:
+                 conexao.close()
      
      # DESAFIO 4 - TRANSPORTE
      
