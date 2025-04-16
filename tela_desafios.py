@@ -46,7 +46,7 @@ def Tela_desafio():
         Tela_menu()
 
 
-def Tela_desafio_energ():
+def Tela_desafio_energ(usuario_logado):
      
      from tela_menu import Tela_menu
      cursor = None
@@ -105,7 +105,7 @@ def Tela_desafio_energ():
              cursor.execute(comando,valor)
              conexao.commit()
 
-             print("\n✅ Inserção de informação realizado com sucesso!")
+             print("\n✅ Inserção de informação realizada com sucesso!")
          except Exception as e:
              print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
          finally:
@@ -172,7 +172,7 @@ def Tela_desafio_energ():
             limpar_terminal()
             Tela_menu()
   
-def Tela_agua_residuos():
+def Tela_agua_residuos(usuario_logado):
     from tela_menu import Tela_menu
     """criar uma tela agua"""
     print("----------------------------------------------------------------------")
@@ -416,7 +416,7 @@ def Tela_agua_residuos():
 
     
 
-def Tela_desafio_transp():
+def Tela_desafio_transp(usuario_logado):
          from tela_menu import Tela_menu
          desafio2 = 1
          
@@ -467,6 +467,25 @@ def Tela_desafio_transp():
                  transporte = "BAIXA SUSTENTABILIDADE"
                  pontos4 = 2
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: BAIXA SUSTENTABILIDADE")
+
+             try:
+                conexao = conectar()
+                cursor = conexao.cursor()
+
+                comando = "INSERT INTO tabela_desafios (desa_transporte) values (%s)"
+                valor = (meiotransporte)
+
+                cursor.execute(comando,valor)
+                conexao.commit()
+
+                print("\n✅ Inserção de informação realizada com sucesso!")
+             except Exception as e:
+                print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
+             finally:
+                if cursor:
+                    cursor.close()
+                if conexao:
+                    conexao.close()
                  
      
              print("--------------------------------------------------------------------")
@@ -497,7 +516,7 @@ def Tela_desafio_transp():
     
     
 
-def Tela_de_nivel_diario():
+def Tela_de_nivel_diario(ususario_logado):
      from tela_principal import Tela_de_dicas
      from tela_principal import Tela_principal
      from tela_principal import Tela_de_saida
@@ -559,7 +578,7 @@ def Tela_de_nivel_diario():
             print("\nOpção inválida! Digite uma opção válida!")
             
             
-def Tela_de_levantamento_de_dados_diario():
+def Tela_de_levantamento_de_dados_diario(usuario_logado):
         from tela_principal import Tela_de_dicas
         from tela_menu import Tela_menu
         from tela_principal import Tela_de_saida
@@ -629,7 +648,7 @@ def Tela_de_levantamento_de_dados_diario():
             else:
                 print("\nOpção inválida! Tente novamente.")
 
-def Tela_sustentabilidade_mensal():
+def Tela_sustentabilidade_mensal(usuario_logado):
     from tela_menu import Tela_menu
     print("----------------------------------------------------------------------")
     print("SUSTENTABILIDADE MENSAL")
