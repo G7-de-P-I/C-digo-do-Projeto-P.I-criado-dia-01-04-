@@ -105,7 +105,7 @@ def Tela_desafio_energ(usuario_logado):
              cursor.execute(comando,valor)
              conexao.commit()
 
-             print("\n✅ Inserção de informação realizada com sucesso!")
+             print("\n✅ Inserção de dados realizada com sucesso!")
          except Exception as e:
              print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
          finally:
@@ -428,13 +428,13 @@ def Tela_desafio_transp(usuario_logado):
              print("")
              print("Excelente! Você passou por quase todos os desafios, conclua o desafio 4 para descobrir o quão sustentável você é.")
              print("")
-             print("Qual meio de transporte você utilizou hoje?")
+             print("Qual meio de transporte você mais utilizou hoje?")
              print("")
              print("Escolha uma opção:")
              print("")
              print("1 - Sem gasto de combustíveis fósseis (a pé, bicicleta, patinete ou outro meio)")
              print("2 - Uso misto de transporte público e privado (ônibus, carona ou outro meio)")
-             print("3 - Uso exclusivo e privado (trasnporte que utiliza combustíveis fósseis)")
+             print("3 - Uso exclusivo e privado (veículo próprio)")
              print("")
              
              
@@ -452,19 +452,19 @@ def Tela_desafio_transp(usuario_logado):
      
              # Nível de sustentabilidade para transporte
              if meiotransporte == 1:
-                 transporte = "ALTA SUSTENTABILIDADE"
+                 transporte = "Sem gasto de combustíveis fósseis"
                  pontos4 = 10
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: ALTA SUSTENTABILIDADE")
                  
                  
                  
              elif meiotransporte == 2:
-                 transporte = "MODERADA SUSTENTABILIDADE"
+                 transporte = "Uso misto de transporte público e privado"
                  pontos4 = 5
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: MODERADA SUSTENTABILIDADE")
                  
              elif meiotransporte == 3:
-                 transporte = "BAIXA SUSTENTABILIDADE"
+                 transporte = "Uso exclusivo e privado"
                  pontos4 = 2
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: BAIXA SUSTENTABILIDADE")
 
@@ -473,12 +473,12 @@ def Tela_desafio_transp(usuario_logado):
                 cursor = conexao.cursor()
 
                 comando = "INSERT INTO tabela_desafios (desa_transporte) values (%s)"
-                valor = (meiotransporte)
+                valor = (transporte)
 
                 cursor.execute(comando,valor)
                 conexao.commit()
 
-                print("\n✅ Inserção de informação realizada com sucesso!")
+                print("\n✅ Inserção de dados realizada com sucesso!")
              except Exception as e:
                 print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
              finally:
