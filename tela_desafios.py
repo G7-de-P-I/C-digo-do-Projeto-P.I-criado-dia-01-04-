@@ -1,15 +1,14 @@
 import os
 from banco import conectar
 
-kwm = 0
+kwh = 0
+consumoagua = 0
+consumoresiduos1 = 0
+consumoresiduos2 = 0
+transporte = ""
 
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-pontos1=10
-pontos2=10
-pontos3=10
-pontos4=10
 
 def Tela_desafio(usuario_logado):
     from tela_menu import Tela_menu
@@ -96,25 +95,6 @@ def Tela_desafio_energ(usuario_logado):
              energia = "BAIXA SUSTENTABILIDADE"
              pontos3 = 2
              print("Seu nível no DESAFIO 3 - ENERGIA É: BAIXA SUSTENTABILIDADE")
-
-         try:
-             conexao = conectar()
-             cursor = conexao.cursor()
-
-             comando = "INSERT INTO tabela_desafios (desa_energia) values (%s)"
-             valor = (str(kwh),)
-
-             cursor.execute(comando,valor)
-             conexao.commit()
-
-             print("\n✅ Inserção de dados realizada com sucesso!")
-         except Exception as e:
-             print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
-         finally:
-             if cursor:
-                 cursor.close()
-             if conexao:
-                 conexao.close()
      
      # DESAFIO 4 - TRANSPORTE
      
@@ -463,7 +443,7 @@ def Tela_desafio_transp(usuario_logado):
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: ALTA SUSTENTABILIDADE")
                  
                  
-                 
+
              elif meiotransporte == 2:
                  transporte = "Uso misto de transporte público e privado"
                  pontos4 = 5
@@ -473,26 +453,6 @@ def Tela_desafio_transp(usuario_logado):
                  transporte = "Uso exclusivo e privado"
                  pontos4 = 2
                  print("Seu nível no DESAFIO 4 - TRANSPORTE É: BAIXA SUSTENTABILIDADE")
-
-             try:
-                conexao = conectar()
-                cursor = conexao.cursor()
-
-                comando = "INSERT INTO tabela_desafios (desa_transporte) values (%s)"
-                valor = (transporte)
-
-                cursor.execute(comando,valor)
-                conexao.commit()
-
-                print("\n✅ Inserção de dados realizada com sucesso!")
-             except Exception as e:
-                print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
-             finally:
-                if cursor:
-                    cursor.close()
-                if conexao:
-                    conexao.close()
-                 
      
              print("--------------------------------------------------------------------")
              print("")
@@ -522,7 +482,7 @@ def Tela_desafio_transp(usuario_logado):
     
     
 
-def Tela_de_nivel_diario(ususario_logado):
+def Tela_de_nivel_diario(ususario_logado, pontos1, pontos2, pontos3, pontos4):
      from tela_principal import Tela_de_dicas
      from tela_principal import Tela_principal
      from tela_principal import Tela_de_saida
@@ -584,7 +544,7 @@ def Tela_de_nivel_diario(ususario_logado):
             print("\nOpção inválida! Digite uma opção válida!")
             
             
-def Tela_de_levantamento_de_dados_diario(usuario_logado):
+def Tela_de_levantamento_de_dados_diario(usuario_logado, pontos1, pontos2, pontos3, pontos4):
         from tela_principal import Tela_de_dicas
         from tela_menu import Tela_menu
         from tela_principal import Tela_de_saida
@@ -719,6 +679,24 @@ def Tela_sustentabilidade_mensal(usuario_logado):
             Tela_menu(usuario_logado)
         else:
             print("Opção inválida. Digite uma opção válida!")
+
+try:
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    comando = 'INSERT INTO tabela_desafios (desa_energia,desa_agua,desa_residuos,desa_enrgia,desa_transporte) values ("kwh","consumoagua","consumoresiduos1","consumoresiduos2","transporte")'
+
+    cursor.execute(comando)
+    conexao.commit()
+
+    print("\n✅ Inserção de dados realizada com sucesso!")
+except Exception as e:
+    print(f"\n❌ Erro ao inserir valor no banco de dados: {e}")
+finally:
+    if cursor:
+        cursor.close()
+    if conexao:
+        conexao.close()
 
 
 
