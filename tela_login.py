@@ -35,14 +35,14 @@ def Tela_login():
                         valores = (email, senha)
                     
                         cursor.execute(comando, valores)
-                        usuario = cursor.fetchone()
+                        usuario_logado = cursor.fetchone()
                     
-                        if usuario:
+                        if usuario_logado:
                             from tela_menu import Tela_menu
                             print("\n✅ Login realizado com sucesso!")
                             input("\nPressione Enter para continuar...")
                             limpar_terminal()
-                            Tela_menu(usuario)
+                            Tela_menu(usuario_logado)
                             break
                         else:
                             print("\n❌ Email ou senha incorretos!")

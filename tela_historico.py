@@ -6,7 +6,7 @@ import os
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def Tela_historico():
+def Tela_historico(usuario_logado):
     from tela_menu import Tela_menu
     from tela_desafios import Tela_desafio
     

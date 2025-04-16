@@ -1,6 +1,8 @@
 import os
 from banco import conectar
 
+kwm = 0
+
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -9,7 +11,7 @@ pontos2=10
 pontos3=10
 pontos4=10
 
-def Tela_desafio():
+def Tela_desafio(usuario_logado):
     from tela_menu import Tela_menu
     """cria uma tela de DESAFIOS."""
     print("----------------------------------------------------------------------")
@@ -39,11 +41,11 @@ def Tela_desafio():
             
     if opcao2 == 1:
         limpar_terminal()
-        Tela_agua_residuos()
+        Tela_agua_residuos(usuario_logado)
     
     elif opcao2 == 2:
         limpar_terminal()
-        Tela_menu()
+        Tela_menu(usuario_logado)
 
 
 def Tela_desafio_energ(usuario_logado):
@@ -70,7 +72,7 @@ def Tela_desafio_energ(usuario_logado):
          while True:
              try:
                  print("")
-                 kwh = float(input("Digite quanto você gasta de energia em Kwh: "))
+                 kwh = int(input("Digite quanto você gasta de energia em Kwh: "))
                  break
              except ValueError:
                  print("")
@@ -99,8 +101,8 @@ def Tela_desafio_energ(usuario_logado):
              conexao = conectar()
              cursor = conexao.cursor()
 
-             comando = "INSERT INTO tabela_desafios (desa_enrgia) values (%s)"
-             valor = (kwh)
+             comando = "INSERT INTO tabela_desafios (desa_energia) values (%s)"
+             valor = (str(kwh),)
 
              cursor.execute(comando,valor)
              conexao.commit()
@@ -136,7 +138,7 @@ def Tela_desafio_energ(usuario_logado):
     
      if opcao8 == 2:
          limpar_terminal()
-         Tela_menu()
+         Tela_menu(usuario_logado)
          
      elif opcao8 == 1:
          limpar_terminal()
@@ -166,11 +168,11 @@ def Tela_desafio_energ(usuario_logado):
          
          if desafio2 == 1:
             limpar_terminal()
-            Tela_desafio_transp()
+            Tela_desafio_transp(usuario_logado)
              
          elif desafio2 == 2:
             limpar_terminal()
-            Tela_menu()
+            Tela_menu(usuario_logado)
   
 def Tela_agua_residuos(usuario_logado):
     from tela_menu import Tela_menu
@@ -235,7 +237,7 @@ def Tela_agua_residuos(usuario_logado):
     
     if opcao1 == 2:
         limpar_terminal()
-        Tela_menu()
+        Tela_menu(usuario_logado)
     
     elif (opcao1==1):
         limpar_terminal()
@@ -264,7 +266,7 @@ def Tela_agua_residuos(usuario_logado):
     
     if (opcao1==2):
         limpar_terminal()
-        Tela_menu()
+        Tela_menu(usuario_logado)
         
     elif (opcao2==1):
         limpar_terminal()
@@ -311,7 +313,7 @@ def Tela_agua_residuos(usuario_logado):
                 
     if opcao3 == 2:
         limpar_terminal()
-        Tela_menu()
+        Tela_menu(usuario_logado)
         
         
     elif (opcao3==1):
@@ -378,7 +380,7 @@ def Tela_agua_residuos(usuario_logado):
     
     if opcao4 == 2:
         limpar_terminal()
-        Tela_menu()
+        Tela_menu(usuario_logado)
     
     elif (opcao4==1):
         limpar_terminal()
@@ -408,11 +410,11 @@ def Tela_agua_residuos(usuario_logado):
                 
         if opcao5 == 1:
                 limpar_terminal()
-                Tela_desafio_energ()
+                Tela_desafio_energ(usuario_logado)
         
         elif opcao5 == 2:
                 limpar_terminal()
-                Tela_menu()        
+                Tela_menu(usuario_logado)        
 
     
 
@@ -512,11 +514,11 @@ def Tela_desafio_transp(usuario_logado):
              
              if opcao10 == 1:
                  limpar_terminal()
-                 Tela_de_nivel_diario()
+                 Tela_de_nivel_diario(usuario_logado)
             
              elif opcao10 == 2:
                  limpar_terminal()
-                 Tela_menu()
+                 Tela_menu(usuario_logado)
     
     
 
@@ -630,19 +632,19 @@ def Tela_de_levantamento_de_dados_diario(usuario_logado):
         
             if opcao9 == 1:
                 limpar_terminal()
-                Tela_de_nivel_diario()
+                Tela_de_nivel_diario(usuario_logado)
             
             elif opcao9==2:
                 limpar_terminal()
-                Tela_de_dicas()
+                Tela_de_dicas(usuario_logado)
             
             elif opcao9==3:
                 limpar_terminal()
-                Tela_menu()
+                Tela_menu(usuario_logado)
             
             elif opcao9== 4:
                 limpar_terminal()
-                Tela_sustentabilidade_mensal()
+                Tela_sustentabilidade_mensal(usuario_logado)
         
             elif opcao9== 5:
                 print("\nVocê encerrou o programa. Até mais!")
@@ -711,10 +713,10 @@ def Tela_sustentabilidade_mensal(usuario_logado):
         opcao22= input("Digite a opção desejada: ")
         if opcao22=="1":
             limpar_terminal()
-            Tela_de_nivel_diario()
+            Tela_de_nivel_diario(usuario_logado)
         elif opcao22=="2":
             limpar_terminal()
-            Tela_menu()
+            Tela_menu(usuario_logado)
         else:
             print("Opção inválida. Digite uma opção válida!")
 

@@ -21,13 +21,13 @@ def Tela_menu(usuario_logado):
                
             if (Telair == 1):
                     limpar_terminal()
-                    Tela_desafio()
+                    Tela_desafio(usuario_logado)
             if( Telair == 2):
                     limpar_terminal()
                     Tela_perfil(usuario_logado)
             elif( Telair == 3):
                     limpar_terminal()
-                    Tela_historico()
+                    Tela_historico(usuario_logado)
             else:
                     print("\n !!Opção inválida! Digite os números correpondentes!! ")  
                
