@@ -417,7 +417,11 @@ def Tela_agua_residuos(usuario_logado):
     
 
 def Tela_desafio_transp(usuario_logado):
+         
          from tela_menu import Tela_menu
+         cursor = None
+         conexao = None
+         
          desafio2 = 1
          
          if desafio2 == 1:

@@ -25,7 +25,7 @@ def Tela_login():
                     senha = input("Digite sua senha: ")
                 
                     conexao = None
-                    cursos = None 
+                    cursor = None 
                 
                     try:
                         conexao = conectar()
