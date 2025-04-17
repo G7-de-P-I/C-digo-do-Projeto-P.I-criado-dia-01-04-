@@ -3,7 +3,7 @@ import sys
 from rich.console import Console
 from rich.table import Table
 from datetime import datetime
-from tela_desafios import Tela_desafio, Tela_de_nivel_diario
+from tela_desafios import Tela_de_nivel_diario
 import os
 
 def limpar_terminal():

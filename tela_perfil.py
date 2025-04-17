@@ -13,13 +13,12 @@ def Tela_perfil(usuario_logado):
     
     
     if usuario_logado:
-        id, nome, email, cpf, senha = usuario_logado
-        print(f"\nOlá {nome}, aqui estão alguns informações que podem ser úteis para você!!")
+        print(f"\nOlá {usuario_logado['nome']}, aqui estão algumas informações que podem ser úteis para você!!")
         print("\nNível sustentável de hoje: ...\n")
-        print(f"ID: {id}")
-        print(f"Nome: {nome}")
-        print(f"E-mail: {email}")
-        print(f"CPF: {cpf}")
+        print(f"ID: {usuario_logado['id']}")
+        print(f"Nome: {usuario_logado['nome']}")
+        print(f"E-mail: {usuario_logado['email']}")
+        print(f"CPF: {usuario_logado['cpf']}")
         input("\nPara VOLTAR pressione Enter")
         limpar_terminal()
         from tela_menu import Tela_menu

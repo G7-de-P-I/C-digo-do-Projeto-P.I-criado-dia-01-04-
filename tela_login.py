@@ -28,8 +28,10 @@ def Tela_login():
                     cursor = None 
                 
                     try:
+                        
                         conexao = conectar()
-                        cursor = conexao.cursor()
+                        cursor = conexao.cursor(dictionary=True)
+                        #Isso aqui é um dicionário o que vai retornar isso: " {'id': 1, 'nome': 'João', 'email': 'joao@email.com', 'cpf': '123456789'} "
                     
                         comando = "SELECT * FROM usuario WHERE email = %s AND senha = %s"
                         valores = (email, senha)

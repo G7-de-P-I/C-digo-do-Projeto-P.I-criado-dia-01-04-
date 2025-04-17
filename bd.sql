@@ -6,13 +6,21 @@ CREATE TABLE usuario(
     senha varchar(50) NOT null
 )
 
-CREATE TABLE tabela_desafios (
-    id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE desafios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+
+CREATE TABLE respostas_desafios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    desa_agua VARCHAR(250) NOT NULL,
-    desa_residuos VARCHAR(250) NOT NULL,
-    desa_enrgia VARCHAR(250) NOT NULL,
-    desa_transporte VARCHAR(250) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
+    id_desafio INT NOT NULL,
+    respostas JSON,   
+    pontuacao INT,          
+    data_resposta DATE,    
+    status VARCHAR(50),     
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_desafio) REFERENCES desafios(id) ON DELETE CASCADE
 );
