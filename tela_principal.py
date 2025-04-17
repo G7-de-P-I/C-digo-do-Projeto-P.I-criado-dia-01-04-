@@ -3,7 +3,7 @@ import sys
 from rich.console import Console
 from rich.table import Table
 from datetime import datetime
-from tela_desafios import Tela_de_nivel_diario
+from tela_desafios import Tela_opcoes
 import os
 
 def limpar_terminal():
@@ -115,12 +115,12 @@ def Tela_de_dicas():
     
     
     while True: 
-        print("Digite para continuar: (1) Tela de Nível ou (2) Menu Principal")
+        print("Digite para continuar: (1) Tela de Opções ou (2) Menu Principal")
         print("")
         opcao20= input("Digite a opção desejada: ")
         if opcao20=="1":
             limpar_terminal()
-            Tela_de_nivel_diario()
+            Tela_opcoes()
         elif opcao20=="2":
             limpar_terminal()
             from tela_menu import Tela_menu

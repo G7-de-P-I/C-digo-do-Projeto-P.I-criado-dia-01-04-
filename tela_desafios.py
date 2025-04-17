@@ -374,18 +374,30 @@ def Tela_opcoes(usuario_logado):
     from tela_historico import Tela_historico
     print("")
     print("----------------------------------------------------------------------")
-                  # Nível de sustentabilidade para transporte
+            # Nível de sustentabilidade para transporte
                 
      
     print("--------------------------------------------------------------------")
     print("\nDESAFIOS CONCLUÍDOS\n")
     print("Escolha uma opção:")
     print("1 - LEVANTAMENTO DE DADOS")
-    print("2 - DADOS MENSAIS")
-    print("3 - DADOS DIÁRIOS")
+    print("2 - SUSTENTABILIDADE MENSAIS")
+    print("3 - SUSTENTABILIDADE DIÁRIA")
     print("4 - VER TABELA DE SUSTENTABILIDADE")
     print("5 - VOLTAR PARA A TELA DE MENU")
             
+    conexao = conectar()
+    cursor = conexao.cursor()
+    
+    comando = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
+    
+    cursor.execute(comando, (usuario_logado["id"],))
+    resultado = cursor.fetchall()
+    
+    cursor.close()
+    conexao.close()
+    desafios_diarios = [sum(linha) for linha in resultado] 
+    
     while True:
         try:
             print("")
@@ -397,15 +409,15 @@ def Tela_opcoes(usuario_logado):
             
         if(opcao10 == 1):
             limpar_terminal()
-            Tela_de_levantamento_de_dados_diario(usuario_logado)
+            Tela_dados(usuario_logado, desafios_diarios[0], desafios_diarios[1], desafios_diarios[2], desafios_diarios[3])
             break
         elif(opcao10 == 2):
             limpar_terminal()
-            Tela_sustentabilidade_mensal(usuario_logado)
+            Tela_mensal(usuario_logado)
             break
         elif(opcao10 == 3):
             limpar_terminal()
-            Tela_de_nivel_diario(usuario_logado)
+            Tela_dia(usuario_logado, desafios_diarios[0], desafios_diarios[1], desafios_diarios[2], desafios_diarios[3])
             break
         elif(opcao10 == 4):
             limpar_terminal()
@@ -437,8 +449,8 @@ def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, dat
             
 
             
-def Tela_sustentabilidade_mensal(usuario_logado):
-    from tela_menu import Tela_menu
+def Tela_mensal(usuario_logado):
+
 
 
     print("----------------------------------------------------------------------")
@@ -456,10 +468,7 @@ def Tela_sustentabilidade_mensal(usuario_logado):
     
     cursor.close()
     conexao.close()
-
-        
-        
-        
+    
     # Lista com os pontos dos 30 dias (pode ser substituído por dados reais depois)
     desafios_diarios = [sum(linha) for linha in resultado]  # exemplo: 30 dias com pontuação máxima
 
@@ -481,23 +490,18 @@ def Tela_sustentabilidade_mensal(usuario_logado):
     while True:
         print("----------------------------------------------------------------------")
         print("Escolha uma opção:")
-        print("(1) Ir para tela diária de sustentábilidade")
-        print("(2) Menu Principal")
-        print("(3) Sair")
+        print("1 - MENU DE OPÇÕES")
+        print("2 - Sair")
         print("----------------------------------------------------------------------")
         opcao = input("Digite a opção desejada: ")
 
+
         if opcao == "1":
             limpar_terminal()
-            Tela_de_nivel_diario(usuario_logado, desafios_diarios[0], desafios_diarios[1], desafios_diarios[2], desafios_diarios[3])  # você pode passar os pontos corretos aqui
+            Tela_opcoes(usuario_logado)
             break
 
         elif opcao == "2":
-            limpar_terminal()
-            Tela_menu(usuario_logado)
-            break
-
-        elif opcao == "3":
             limpar_terminal()
             print("\nAté mais!")
             break
@@ -505,15 +509,15 @@ def Tela_sustentabilidade_mensal(usuario_logado):
         else:
             print("Opção inválida. Tente novamente.")
             
-            
 
-def Tela_de_nivel_diario(usuario_logado, pontos1, pontos2, pontos3, pontos4):
-     from tela_principal import Tela_de_dicas
-     from tela_principal import Tela_principal
-     from tela_principal import Tela_de_saida
+#------------------------------------
+
+def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
+    from tela_principal import Tela_de_dicas
+    from tela_principal import Tela_principal
+    from tela_principal import Tela_de_saida
      
-     
-     while True:
+    while True:
         print("----------------------------------------------------------------------")
         print("\nPARABÉNS, VOCÊ CONCLUIU O DESAFIO SUSTENTAÍ!\n")
         print("\nAgora você poderá saber o quão sustentável você é!\n")
@@ -538,16 +542,16 @@ def Tela_de_nivel_diario(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             print("Mas fique tranquilo(a), vamos te ajudar a melhorar...")
             
         print("\nEscolha uma opção:")
-        print("(1) Levantamento de Dados")
-        print("(2) Obter Dicas")
-        print("(3) Menu Principal")
-        print("(4) Sair")
+        print("1 - MENU OPÇÕES")
+        print("2 -Obter Dicas")
+        print("3 - Menu Principal")
+        print("4 - Sair")
         
-        opcao = input("Digite a opção desejada: ")
+        opcao = int(input("Digite a opção desejada: "))
         
         if opcao == 1:
             limpar_terminal()
-            Tela_de_levantamento_de_dados_diario(usuario_logado)  
+            Tela_opcoes(usuario_logado)  
             
         elif opcao == 2:
             limpar_terminal()
@@ -559,7 +563,7 @@ def Tela_de_nivel_diario(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             
         elif opcao == 4:
             limpar_terminal()
-            Tela_de_saida()
+            Tela_de_saida(usuario_logado)
             
             break
         else:
@@ -567,15 +571,26 @@ def Tela_de_nivel_diario(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             
             
             
-def Tela_de_levantamento_de_dados_diario(pontos1, pontos2, pontos3, pontos4):
+            
+            
+def Tela_dados(usuario_logado, pontos1, pontos2, pontos3, pontos4):
         from tela_principal import Tela_de_dicas
         from tela_menu import Tela_menu
         from tela_principal import Tela_de_saida
         
         conexao = conectar()
-        cursor = conexao.cursor() 
+        cursor = conexao.cursor()
+    
+        comando = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
+    
+        cursor.execute(comando, (usuario_logado["id"],))
+        resultado = cursor.fetchall()
+    
+        cursor.close()
+        conexao.close()
+
         
-        
+        desafios_diarios = [sum(linha) for linha in resultado]
         
         total_pontos = pontos1 + pontos2 + pontos3 + pontos4 
         if total_pontos > 0:
@@ -611,30 +626,20 @@ def Tela_de_levantamento_de_dados_diario(pontos1, pontos2, pontos3, pontos4):
         
         while True:
             print("\nEscolha uma opção:")
-            print("(1) Voltar a Tela de Nível")
-            print("(2) Obter Dicas")
-            print("(3) Menu Principal")
-            print("(4) Sustentabilidade Mensal")
-            print("(5) Sair")
-            opcao9 = int(input("Digite a opção desejada: "))
+            print("1 - MENU OPCÕES")
+            print("2 - DICAS")
+            print("3 - Sair")
+            opcao9 = int(input("\nDigite a opção desejada: "))
         
             if opcao9 == 1:
                 limpar_terminal()
-                Tela_de_nivel_diario(usuario_logado)
+                Tela_opcoes(usuario_logado)
             
             elif opcao9==2:
                 limpar_terminal()
                 Tela_de_dicas(usuario_logado)
             
             elif opcao9==3:
-                limpar_terminal()
-                Tela_menu(usuario_logado)
-            
-            elif opcao9== 4:
-                limpar_terminal()
-                Tela_sustentabilidade_mensal(usuario_logado)
-        
-            elif opcao9== 5:
                 print("\nVocê encerrou o programa. Até mais!")
                 limpar_terminal()
                 Tela_de_saida()
