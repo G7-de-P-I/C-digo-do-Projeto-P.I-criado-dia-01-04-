@@ -425,6 +425,9 @@ def Tela_opcoes(usuario_logado):
             break
             
 
+
+#teste de comentário
+
 def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, data_resposta ):
     try:
         conexao = conectar()
