@@ -35,9 +35,7 @@ def Tela_cadastro():
 
     senha = input("\n Senha: ") 
     
-    
-    
-    
+     
     try:
         #ele faz isso ...
         conexao = conectar()
@@ -49,7 +47,7 @@ def Tela_cadastro():
         cursor.execute(comando, valores)
         conexao.commit()
         
-        print("\n✅ Cadastro Realizado com Sucesso!")
+        print("\n✅ Cadastro Realizado com Sucesso!") 
     except Exception as e:
         print(f"\n❌ Erro ao cadastrar: {e}")    
     finally:
