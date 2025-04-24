@@ -7,4 +7,4 @@ def conectar():
         password ="",
         database="projeto_pi"
     )
-    return
+    return conexao

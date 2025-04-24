@@ -127,6 +127,7 @@ def Tela_agua(usuario_logado):
 
 # Função para a tela do desafio resíduos
 def Tela_residuos(usuario_logado):
+        from tela_menu import Tela_menu
         data_agora = datetime.now()
         limpar_terminal()
 
@@ -179,7 +180,7 @@ def Tela_residuos(usuario_logado):
         if opcao3 == 2:
             # Limpa o terminal e chama a tela de menu
             limpar_terminal()
-            tela_menu(usuario_logado)
+            Tela_menu(usuario_logado)
 
         elif (opcao3==1):
             # Limpa o terminal e abre a parte 2 do desafio resíduos
@@ -261,7 +262,7 @@ def Tela_residuos(usuario_logado):
         if opcao4 == 2:
             # Limpa o terminal e chama a tela de menu
             limpar_terminal()
-            tela_menu(usuario_logado)
+            Tela_menu(usuario_logado)
     
         elif (opcao4==1):
             # Limpa o terminal e chama a tela do desafio energia
