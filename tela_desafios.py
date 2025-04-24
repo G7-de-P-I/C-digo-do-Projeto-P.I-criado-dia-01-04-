@@ -493,41 +493,64 @@ def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, dat
 
 # Função para a tela de sustentabilidade mensal      
 def Tela_mensal(usuario_logado):
-
+    from datetime import date
 
 
     print("----------------------------------------------------------------------")
     print("SUSTENTABILIDADE MENSAL")
     print("----------------------------------------------------------------------\n")
 
-    # Conecta com o banco
+ # Conectar ao banco
     conexao = conectar()
     cursor = conexao.cursor()
-    
-    comando = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
-    
-    cursor.execute(comando, (usuario_logado["id"],))
+    id_usuario = usuario_logado["id"]
+
+    # Verificar quantos registros mensais já existem para esse usuário
+    comando_verificar = """
+    SELECT COUNT(*) FROM resultados_desafios
+    WHERE id_usuario = %s
+    """
+    cursor.execute(comando_verificar, (id_usuario,))
+    quantidade_registros = cursor.fetchone()[0]
+
+    # Selecionar as pontuações diárias
+    comando_pontuacoes = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
+    cursor.execute(comando_pontuacoes, (id_usuario,))
     resultado = cursor.fetchall()
-    
+
+    # Lista com os pontos dos 30 dias
+    desafios_diarios = [sum(linha) for linha in resultado]
+
+    # Só continua se tiver 30 respostas
+    if len(desafios_diarios) >= 30 and quantidade_registros == 0:
+        # Calcular média mensal
+            Smensal = sum(desafios_diarios) / 30
+
+    # Mostrar nível (opcional)
+            if 30 <= Smensal <= 40:
+                nivel = "ALTA"
+            elif 20 <= Smensal < 30:
+                nivel = "MODERADA"
+            else:
+                nivel = "BAIXA"
+
+            print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
+            print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
+
+    # Inserir na tabela de resultados mensais
+            comando_inserir = """
+            INSERT INTO resultados_desafios (id_usuario, resultado_mensal, data)
+            VALUES (%s, %s, %s)
+            """
+            data_atual = date.today()
+            cursor.execute(comando_inserir, (id_usuario, Smensal, data_atual))
+            conexao.commit()
+    else:
+            print("Ainda não há 30 dias de resultados ou já foi registrado um resultado mensal.")
+
+    # Fechar conexão
     cursor.close()
     conexao.close()
-    
-    # Lista com os pontos dos 30 dias (pode ser substituído por dados reais depois)
-    desafios_diarios = [sum(linha) for linha in resultado]  # exemplo: 30 dias com pontuação máxima
-
-    # Calcular média mensal
-    Smensal = sum(desafios_diarios) / 30
-
-    # Exibir nível de sustentabilidade
-    if 30 <= Smensal <= 40:
-        nivel = "ALTA"
-    elif 20 <= Smensal < 30:
-        nivel = "MODERADA"
-    else:
-        nivel = "BAIXA"
-
-    print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
-    print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
 
     # Menu de opções
     while True:
@@ -586,9 +609,9 @@ def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             
         print("\nEscolha uma opção:")
         print("1 - MENU OPÇÕES")
-        print("2 -Obter Dicas")
-        print("3 - Menu Principal")
-        print("4 - Sair")
+        print("2 - OBTER DICAS")
+        print("3 - MENU PRINCIPAL")
+        print("4 - SAIR")
         
         opcao = int(input("Digite a opção desejada: "))
         
@@ -618,7 +641,6 @@ def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             
 def Tela_dados(usuario_logado, pontos1, pontos2, pontos3, pontos4):
         from tela_principal import Tela_de_dicas
-        from tela_menu import Tela_menu
         from tela_principal import Tela_de_saida
         
         conexao = conectar()

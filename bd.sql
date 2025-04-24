@@ -17,7 +17,7 @@ CREATE TABLE respostas_desafios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_desafio INT NOT NULL,
-    respostas JSON,   
+    respostas VARCHAR(250),   
     pontuacao INT,          
     data_resposta DATE,    
     status VARCHAR(50),     
