@@ -39,12 +39,12 @@ def Tela_desafio(usuario_logado):
         
         
         
-        
+# Função para a tela do desafio água     
 def Tela_agua(usuario_logado):
     from tela_menu import Tela_menu
     data_agora = datetime.now()
-    """Criar a tela do DESAFIO 1 - ÁGUA"""
 
+    # Explicação do desafio água
     print("----------------------------------------------------------------------")
     print("DESAFIO 1 - ÁGUA:")
     print("----------------------------------------------------------------------")
@@ -58,6 +58,7 @@ def Tela_agua(usuario_logado):
     print("3- Faça o valor dividido por 30 (valor/30) se for sua primeira vez no desafio.")
     print("")
 
+    # Pede para o usuário digitar o valor do seu consumo de água e verifica se um valor válido foi digitado
     while True:
         try:
             print("")
@@ -75,27 +76,32 @@ def Tela_agua(usuario_logado):
     if consumoagua1 < 150:
         agua = "ALTA SUSTENTABILIDADE"
         pontos1 = 10
+        # Salva os dados no banco de dados
         Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
         print("Seu nível no DESAFIO 1 - ÁGUA é: ALTA SUSTENTABILIDADE")
         
     elif 150 <= consumoagua1 <= 200:
         agua = "MODERADA SUSTENTABILIDADE"
         pontos1 = 5
+        # Salva os dados no banco de dados
         Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
         print("Seu nível no DESAFIO 1 - ÁGUA é: MODERADA SUSTENTABILIDADE")
         
     else:
         agua = "BAIXA SUSTENTABILIDADE"
         pontos1 = 2
+        # Salva os dados no banco de dados
         Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
         print("Seu nível no DESAFIO 1 - ÁGUA é: BAIXA SUSTENTABILIDADE")
     
+    # Opção de continuar para o próximo desafio ou voltar para a tela de menu
     print("----------------------------------------------------------------------")
     print("")
     print("Escolha uma opção:")
     print("1 - CONTINUAR")
     print("2 - VOLTAR PARA A TELA MENU")
     
+    # Pede para o usuário digitar a opção escolhida e verifica se um valor válido foi digitado
     while True:
         try:
             print("")
@@ -108,19 +114,23 @@ def Tela_agua(usuario_logado):
     
     print("")
 
+
     if opcao1 == 2:
+        # Limpa o terminal e chama a tela de menu
         limpar_terminal()
         Tela_menu(usuario_logado)
     
     elif opcao1 == 1:
-        # Salvar a resposta no banco de dados no final
+        # Limpa o terminal e chama a tela do desafio resìduos
         limpar_terminal()
         Tela_residuos(usuario_logado)
-        
-        
+
+# Função para a tela do desafio resíduos
 def Tela_residuos(usuario_logado):
         data_agora = datetime.now()
         limpar_terminal()
+
+        # Tela de explicação do desafio resíduos
         print("----------------------------------------------------------------------")
         print("DESAFIO 2 - RESÍDUOS:")
         print("----------------------------------------------------------------------")
@@ -137,6 +147,7 @@ def Tela_residuos(usuario_logado):
         print("2- Pese os sacos - Use uma balança doméstica para medir o peso de cada tipo de resíduo")
         print("3- Registre os valores - Anote a quantidade (peso) de lixo reciclável e não reciclável que você produz em um dia. ")
         
+        # Pede para o usuário digitar o peso do seu consumo de lixo reciclável e verifica se um valor válido foi digitado
         while True:
             try:
                 print("")
@@ -145,7 +156,8 @@ def Tela_residuos(usuario_logado):
             except ValueError:
                 print("")
                 print("Erro: Digite um valor númerico válido para resíduo.")
-    
+
+        # Opção de continuar para a parte 2 do desafio resíduos ou voltar para a tela de menu
         print("")
         print("Escolha uma opção:")
         print("")
@@ -153,6 +165,8 @@ def Tela_residuos(usuario_logado):
         print("2 - VOLTAR PARA A TELA MENU")
         
         print("")
+
+        # Pede para o usuário digitar a opção escolhida e verifica se um valor válido foi digitado
         while True:
             try:
                 opcao3=int(input("Digite a opção escolhida: "))
@@ -163,9 +177,15 @@ def Tela_residuos(usuario_logado):
                 print("")
                 
         if opcao3 == 2:
+            # Limpa o terminal e chama a tela de menu
             limpar_terminal()
+            tela_menu(usuario_logado)
+
         elif (opcao3==1):
+            # Limpa o terminal e abre a parte 2 do desafio resíduos
             limpar_terminal()
+
+            # Explica a parte 2 do desafio resíduos
             print("----------------------------------------------------------------------")
             print("DESAFIO RESÍDUOS PARTE 2")
             print("----------------------------------------------------------------------")
@@ -180,6 +200,7 @@ def Tela_residuos(usuario_logado):
             print("2- Pese os sacos - Use uma balança doméstica para medir o peso de cada tipo de resíduo")
             print("3- Registre os valores - Anote a quantidade (peso) de lixo reciclável e não reciclável que você produz em um dia. ")
         
+            # Pede para o usuario digitar o peso do seu consumo de lixo não reciclável e verifica se um valor válido foi digitado
             while True:
                 try:
                     print("")
@@ -190,35 +211,42 @@ def Tela_residuos(usuario_logado):
                     print("Erro: Digite um valor númerico válido para resíduo.")
             print("")
             print("----------------------------------------------------------------------") 
-    
+        
+        # Determina a sustentabilidade do desafio resíduos
         if (consumoresiduos1>consumoresiduos2*1.5):
             residuos = "ALTA SUSTENTABILIDADE"
             pontos2 = 10
+            # Salva os dados no banco de dados
             Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
             print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
     
         elif ((consumoresiduos1>=consumoresiduos2*1.2) and (consumoresiduos1<=consumoresiduos2*1.5)):
             residuos = "MODERADA SUSTENTABILIDADE"
             pontos2 = 5
+            # Salva os dados no banco de dados
             Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
             print("Seu nível no DESAFIO 2 - RESÍDUOS é: MODERADA SUSTENTABILIDADE")
         elif (consumoresiduos1<consumoresiduos2*0.8):
             residuos = "BAIXA SUSTENTABILIDADE"
             pontos2 = 2
+            # Salva os dados no banco de dados
             Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
             print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
         else:
             residuos = "BAIXA SUSTENTABILIDADE"
             pontos2 = 2
+            # Salva os dados no banco de dados
             Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
             print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
     
+        # Opção de continuar para o próximo desafio ou voltar para a tela de menu
         print("----------------------------------------------------------------------")
         print("")     
         print("Escolha uma opção:")
         print("1 - CONTINUAR")
         print("2 - VOLTAR PARA A TELA MENU")
     
+        # Pede para o usuário digitar a opção escolhida e verifica se um valor válido foi digitado
         while True:
             try:
                 print("")
@@ -231,19 +259,22 @@ def Tela_residuos(usuario_logado):
         print("")   
     
         if opcao4 == 2:
+            # Limpa o terminal e chama a tela de menu
             limpar_terminal()
-            Tela_energia(usuario_logado)
+            tela_menu(usuario_logado)
     
         elif (opcao4==1):
+            # Limpa o terminal e chama a tela do desafio energia
             limpar_terminal()
             Tela_energia(usuario_logado)
+
         
-        
-        
-        
+# Função para a tela do desafio energia      
 def Tela_energia(usuario_logado):
             from tela_menu import Tela_menu
             data_agora = datetime.now()
+
+            # Tela de explicação do desafio energia
             print("----------------------------------------------------------------------") 
             print("DESAFIO 3 - ENERGIA")
             print("----------------------------------------------------------------------") 
@@ -255,6 +286,7 @@ def Tela_energia(usuario_logado):
             print("\n2. Localize o consumo mensal -")
             print("Procure a informação de consumo total, geralmente expressa em kWh (quilowatt-hora).")
          
+            # Pede para o usuário digitar o seu consumo de energia e verifica se um valor válido foi digitado
             while True:
                 try:
                     print("")
@@ -267,27 +299,29 @@ def Tela_energia(usuario_logado):
             print("")
             print("----------------------------------------------------------------------")
          
-         # Nível de sustentabilidade para energia
+            # Determina a sustentabilidade do desafio energia
             if kwh < 5:
                 energia = "ALTA SUSTENTABILIDADE"
                 pontos3 = 10
+                # Salva os dados no banco de dados
                 Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
                 print("Seu nível no DESAFIO 3 - ENERGIA É: ALTA SUSTENTABILIDADE")
              
             elif 5 <= kwh <= 10:
                 energia = "MODERADA SUSTENTABILIDADE"
                 pontos3 = 5
+                # Salva os dados no banco de dados
                 Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
                 print("Seu nível no DESAFIO 3 - ENERGIA É: MODERADA SUSTENTABILIDADE")
              
             else:
                 energia = "BAIXA SUSTENTABILIDADE"
                 pontos3 = 2
+                # Salva os dados no banco de dados
                 Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
                 print("Seu nível no DESAFIO 3 - ENERGIA É: BAIXA SUSTENTABILIDADE")
      
-    
-     
+            # Opção de continuar para o próximo desafio ou voltar para a tela de menu
             print("----------------------------------------------------------------------") 
             print("")
             print("Escolha uma opção:")
@@ -295,6 +329,7 @@ def Tela_energia(usuario_logado):
             print("1 - CONTINUAR")
             print("2 - VOLTAR PARA A TELA MENU")
          
+            # Pede para o usuário digitar a opção escolhida e verifica se um valor válido foi digitado
             while True:
                 try:
                     print("")
@@ -305,19 +340,23 @@ def Tela_energia(usuario_logado):
                     print("Erro: Digite uma opção válida.")
      
             print("")
+
             if opcao8 == 2:
+                # Limpa o terminal e chama a tela de menu
                 limpar_terminal()
                 Tela_menu(usuario_logado)
          
             elif opcao8 == 1:
+                # Limpa o terminal e chama a tela do desafio transporte
                 limpar_terminal()
                 Tela_transporte(usuario_logado)
                 
                 
-                
+# Função para a tela desafio transporte            
 def Tela_transporte(usuario_logado): 
-    
     data_agora = datetime.now()
+
+    # Tela de explicação do desafio transporte
     print("----------------------------------------------------------------------")
     print("DESAFIO 4 - TRANSPORTE")
     print("----------------------------------------------------------------------")
@@ -332,7 +371,8 @@ def Tela_transporte(usuario_logado):
     print("2 - Uso misto de transporte público e privado (ônibus, carona ou outro meio)")
     print("3 - Uso exclusivo e privado (veículo próprio)")
     print("")
-                       
+    
+    # Pede para o usuário digitar o seu transporte mais utilizado no dia atual e verifica se um valor válido foi digitado
     while True:
         try:
             meiotransporte = int(input("Digite uma das opções: "))
@@ -357,12 +397,14 @@ def Tela_transporte(usuario_logado):
                 continue  # volta pro início do loop
 
             # Se chegou aqui, é porque a opção foi válida
+            # Salva no banco de dados
             Salvar_no_Banco(usuario_logado, 4, transporte, pontos4, "Concluido", data_agora)
             break
 
         except ValueError:
             print("\nErro: Digite um número válido.\n")
                 
+    # Limpa o terminal e chama a tela de opções
     limpar_terminal()
     print("\nMUITO BEM, DESAFIOS TERMINADOS\n")
     Tela_opcoes(usuario_logado)
