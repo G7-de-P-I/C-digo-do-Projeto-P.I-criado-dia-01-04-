@@ -490,7 +490,7 @@ def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, dat
             conexao.close()
             
 
-            
+# Função para a tela de sustentabilidade mensal      
 def Tela_mensal(usuario_logado):
 
 
@@ -499,7 +499,7 @@ def Tela_mensal(usuario_logado):
     print("SUSTENTABILIDADE MENSAL")
     print("----------------------------------------------------------------------\n")
 
-
+    # Conecta com o banco
     conexao = conectar()
     cursor = conexao.cursor()
     
