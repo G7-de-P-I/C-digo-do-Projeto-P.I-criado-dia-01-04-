@@ -13,9 +13,9 @@ def Tela_historico(usuario_logado):
         
     print("--------------------------------")
     print("1 - DESAFIO ÁGUA")
-    print("2 - DESAFIO ÁGUA")
-    print("3 - DESAFIO ÁGUA")
-    print("4 - DESAFIO ÁGUA")
+    print("2 - DESAFIO RESÍDUOS")
+    print("3 - DESAFIO ENERGIA")
+    print("4 - DESAFIO TRANSPORTE")
     print("--------------------------------")
     print(" ")
     
@@ -60,18 +60,17 @@ def Tela_historico(usuario_logado):
         print("Formato de data inválido. Use o formato DD/MM/AAAA.")
     
     while True:
-        data_input = input("\nDigite uma data (DD/MM/AAAA), caso deseje alterar as informações dos desafios!(PARA RETORNAR PRESS ENTER):  ")
+        alter_desa = input("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(1 para Água / 2 para Resíduos ...): \n")
+        new_valor = float(input("Agora digite o novo valor: "))
         
-        if(data_input == ""):
-            limpar_terminal()
-            Tela_menu(usuario_logado)
-        try:
-            data_formatada = datetime.strptime(data_input, "%d/%m/%Y").strftime("%d/%m/%Y")
-            break
-        except ValueError:
-            print("Formato inválido! Use DD/MM/AAAA.")
+        conexao = conectar()
+        cursor = conexao.cursor(dictionary=True)
+        
+        
             
-    limpar_terminal()
-    
-    print("MUDANDO INFORMAÇÕES DOS DESAFIOS - DIA { data chamada }")
-    Tela_desafio(usuario_logado)
+        comando = "UPDATE respostas_desafios SET valor = %s WHERE id_usuario = %s AND id_desafio = %s"
+        cursor.execute(comando, (new_valor, usuario_logado["id"], alter_desa))
+        conexao.commit()
+        limpar_terminal()
+        print("ATUALIZADO ✅")    
+        Tela_historico(usuario_logado)
