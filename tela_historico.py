@@ -11,6 +11,7 @@ def Tela_historico():
     from tela_desafios import Tela_desafio
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     console = Console()
     
     t = Table(title = "\nHistórico de Sustentabilidade")
@@ -25,6 +26,8 @@ def Tela_historico():
     console.print(t)
     
 =======
+=======
+>>>>>>> Stashed changes
     
     print("--------------------------------")
     print("1 - DESAFIO ÁGUA")
@@ -72,6 +75,9 @@ def Tela_historico():
         print("Formato de data inválido. Use o formato DD/MM/AAAA.")
         
        
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     
     while True:
