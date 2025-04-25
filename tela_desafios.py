@@ -77,21 +77,21 @@ def Tela_agua(usuario_logado):
         agua = "ALTA SUSTENTABILIDADE"
         pontos1 = 10
         # Salva os dados no banco de dados
-        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
+        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora, consumoagua1 )
         print("Seu nível no DESAFIO 1 - ÁGUA é: ALTA SUSTENTABILIDADE")
         
     elif 150 <= consumoagua1 <= 200:
         agua = "MODERADA SUSTENTABILIDADE"
         pontos1 = 5
         # Salva os dados no banco de dados
-        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
+        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora, consumoagua1 )
         print("Seu nível no DESAFIO 1 - ÁGUA é: MODERADA SUSTENTABILIDADE")
         
     else:
         agua = "BAIXA SUSTENTABILIDADE"
         pontos1 = 2
         # Salva os dados no banco de dados
-        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora )
+        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora, consumoagua1 )
         print("Seu nível no DESAFIO 1 - ÁGUA é: BAIXA SUSTENTABILIDADE")
     
     # Opção de continuar para o próximo desafio ou voltar para a tela de menu
@@ -212,24 +212,46 @@ def Tela_residuos(usuario_logado):
         print("")
         print("----------------------------------------------------------------------") 
     
-    if (consumoresiduos1>consumoresiduos2*1.5):
-        resíduos = "ALTA SUSTENTABILIDADE"
-        pontos2 = 10
-        print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
+           # Pede para o usuario digitar o peso do seu consumo de lixo não reciclável e verifica se um valor válido foi digitado
+        while True:
+                try:
+                    print("")
+                    consumoresiduos2=float(input("Quanto pesa seu lixo não reciclável em gramas(g)? "))
+                    break
+                except ValueError:
+                    print("")
+                    print("Erro: Digite um valor númerico válido para resíduo.")
+        print("")
+        print("----------------------------------------------------------------------") 
+        
+        # Determina a sustentabilidade do desafio resíduos
+        if (consumoresiduos1>consumoresiduos2*1.5):
+            residuos = "ALTA SUSTENTABILIDADE"
+            pontos2 = 10
+            # Salva os dados no banco de dados
+            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora, consumoresiduos1 )
+            print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
+            print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
     
-<<<<<<< Updated upstream
-    elif ((consumoresiduos1>=consumoresiduos2*1.2) and (consumoresiduos1<=consumoresiduos2*1.5)):
-        resíduos = "MODERADA SUSTENTABILIDADE"
-        pontos2 = 5
-        print("Seu nível no DESAFIO 2 - RESÍDUOS é: MODERADA SUSTENTABILIDADE")
-    elif (consumoresiduos1<consumoresiduos2*0.8):
-        resíduos = "BAIXA SUSTENTABILIDADE"
-        pontos2 = 2
-        print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
-    else:
-        resíduos = "BAIXA SUSTENTABILIDADE"
-        pontos2 = 2
-        print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
+
+        elif ((consumoresiduos1>=consumoresiduos2*1.2) and (consumoresiduos1<=consumoresiduos2*1.5)):
+            residuos = "MODERADA SUSTENTABILIDADE"
+            pontos2 = 5
+            # Salva os dados no banco de dados
+            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora, consumoresiduos1 )
+            print("Seu nível no DESAFIO 2 - RESÍDUOS é: MODERADA SUSTENTABILIDADE")
+        elif (consumoresiduos1<consumoresiduos2*0.8):
+            residuos = "BAIXA SUSTENTABILIDADE"
+            pontos2 = 2
+            # Salva os dados no banco de dados
+            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora, consumoresiduos1 )
+            print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
+        else:
+            residuos = "BAIXA SUSTENTABILIDADE"
+            pontos2 = 2
+            # Salva os dados no banco de dados
+            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora, consumoresiduos1 )
+            print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
     
         # Opção de continuar para o próximo desafio ou voltar para a tela de menu
         print("----------------------------------------------------------------------")
@@ -296,21 +318,21 @@ def Tela_energia(usuario_logado):
                 energia = "ALTA SUSTENTABILIDADE"
                 pontos3 = 10
                 # Salva os dados no banco de dados
-                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
+                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora, kwh)
                 print("Seu nível no DESAFIO 3 - ENERGIA É: ALTA SUSTENTABILIDADE")
              
             elif 5 <= kwh <= 10:
                 energia = "MODERADA SUSTENTABILIDADE"
                 pontos3 = 5
                 # Salva os dados no banco de dados
-                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
+                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora, kwh)
                 print("Seu nível no DESAFIO 3 - ENERGIA É: MODERADA SUSTENTABILIDADE")
              
             else:
                 energia = "BAIXA SUSTENTABILIDADE"
                 pontos3 = 2
                 # Salva os dados no banco de dados
-                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora )
+                Salvar_no_Banco(usuario_logado, 3, energia, pontos3, "Concluido", data_agora, kwh)
                 print("Seu nível no DESAFIO 3 - ENERGIA É: BAIXA SUSTENTABILIDADE")
      
             # Opção de continuar para o próximo desafio ou voltar para a tela de menu
@@ -390,7 +412,7 @@ def Tela_transporte(usuario_logado):
 
             # Se chegou aqui, é porque a opção foi válida
             # Salva no banco de dados
-            Salvar_no_Banco(usuario_logado, 4, transporte, pontos4, "Concluido", data_agora)
+            Salvar_no_Banco(usuario_logado, 4, transporte, pontos4, "Concluido", data_agora, 0)
             break
 
         except ValueError:
@@ -459,14 +481,14 @@ def Tela_opcoes(usuario_logado):
             break
             
 
-def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, data_resposta ):
+def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, data_resposta, valor ):
     try:
         conexao = conectar()
         cursor = conexao.cursor()
     
     
-        comando = "INSERT INTO respostas_desafios(id_usuario, id_desafio, respostas, pontuacao, status, data_resposta) VALUES(%s, %s, %s, %s, %s, %s)"
-        valores = (usuario_logado['id'], id_desafio, resposta, pontuacao, status, data_resposta)
+        comando = "INSERT INTO respostas_desafios(id_usuario, id_desafio, respostas, pontuacao, status, data_resposta, valor) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        valores = (usuario_logado['id'], id_desafio, resposta, pontuacao, status, data_resposta, valor)
     
         cursor.execute(comando, valores)
         conexao.commit()

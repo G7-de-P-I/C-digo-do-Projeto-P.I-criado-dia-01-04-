@@ -10,32 +10,7 @@ def limpar_terminal():
 def Tela_historico(usuario_logado):
     from tela_menu import Tela_menu
     from tela_desafios import Tela_desafio
-    
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    console = Console()
-    
-    t = Table(title = "\nHistórico de Sustentabilidade")
-    
-    t.add_column("Data", justify= "center", style="white")
-    t.add_column("Pesquisa feita?", justify= "left", style="white")
-    t.add_column("Nivel de Sustentabilidade", justify= "center", style="white")
-    
-    t.add_row("01/04/2025", "Pendente", "Indefinido")
-    t.add_row("03/04/2025", "concluído", "Alto")
-    
-    console.print(t)
-    
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    
+        
     print("--------------------------------")
     print("1 - DESAFIO ÁGUA")
     print("2 - DESAFIO ÁGUA")
@@ -43,19 +18,24 @@ def Tela_historico(usuario_logado):
     print("4 - DESAFIO ÁGUA")
     print("--------------------------------")
     print(" ")
+    
     data_desejada_string = input("Digite a data que deseja bucar suas informções de sustentabilidade!! (DD/MM/AAAA): ")
     
-    data_desejada = datetime.strptime(data_desejada_string, "%d/%m/%Y").date()
+    try:
     
-    conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
-    comando = "SELECT data_resposta FROM respostas_desafios WHERE id_usuario = %s ORDER BY data_resposta DESC"
-    cursor.execute(comando, (usuario_logado["id"],))
-    datas = cursor.fetchall()
+        data_desejada = datetime.strptime(data_desejada_string, "%d/%m/%Y").date()
     
-    console = Console()
+        conexao = conectar()
+        cursor = conexao.cursor(dictionary=True)
+        comando = "SELECT data_resposta, pontuacao, respostas, id_desafio, valor FROM respostas_desafios WHERE id_usuario = %s ORDER BY data_resposta DESC"
+        cursor.execute(comando, (usuario_logado["id"],))
+        dados = cursor.fetchall()
     
-    t = Table(title="\nHistórico de Sustentabilidade")
+        console = Console()
+        
+        if dados:
+    
+            t = Table(title="\nHistórico de Sustentabilidade")
 
             t.add_column("N° DESAFIO", justify="left", style="white")
             t.add_column("RESPOSTA", justify="center", style="white")
@@ -63,7 +43,7 @@ def Tela_historico(usuario_logado):
             t.add_column("VALOR FORNECIDO", justify="center", style="white")
             t.add_column("DATA", justify="center", style="white")
     
-        
+       
             for linha in dados:
                 desafio = str(linha['id_desafio'])
                 resposta = str(linha['respostas'])
@@ -78,31 +58,6 @@ def Tela_historico(usuario_logado):
             print(f"\nNenhum desafio foi respondido em {data_desejada.strftime('%d/%m/%Y')}.")
     except ValueError:
         print("Formato de data inválido. Use o formato DD/MM/AAAA.")
-        
-       
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    t.add_column("Sustentabilidade do dia", justify="left", style="white")
-    t.add_column("Data", justify="center", style="white")
-
-    if datas:
-        for linha in datas:
-            datas = linha['data_resposta']
-            data_formatada = datas.strftime("%d/%m/%Y")
-            # Você pode substituir "Pendente" por alguma lógica real de sustentabilidade
-            t.add_row(usuario_logado['nome'], "Pendente", data_formatada)
-    else:
-        t.add_row(usuario_logado['nome'], "Sem dados", "-")
-
-    console.print(t)        
     
     while True:
         data_input = input("\nDigite uma data (DD/MM/AAAA), caso deseje alterar as informações dos desafios!(PARA RETORNAR PRESS ENTER):  ")
