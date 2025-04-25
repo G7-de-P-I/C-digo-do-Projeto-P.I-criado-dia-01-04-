@@ -201,44 +201,35 @@ def Tela_residuos(usuario_logado):
             print("2- Pese os sacos - Use uma balança doméstica para medir o peso de cada tipo de resíduo")
             print("3- Registre os valores - Anote a quantidade (peso) de lixo reciclável e não reciclável que você produz em um dia. ")
         
-            # Pede para o usuario digitar o peso do seu consumo de lixo não reciclável e verifica se um valor válido foi digitado
-            while True:
-                try:
-                    print("")
-                    consumoresiduos2=float(input("Quanto pesa seu lixo não reciclável em gramas(g)? "))
-                    break
-                except ValueError:
-                    print("")
-                    print("Erro: Digite um valor númerico válido para resíduo.")
-            print("")
-            print("----------------------------------------------------------------------") 
-        
-        # Determina a sustentabilidade do desafio resíduos
-        if (consumoresiduos1>consumoresiduos2*1.5):
-            residuos = "ALTA SUSTENTABILIDADE"
-            pontos2 = 10
-            # Salva os dados no banco de dados
-            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
-            print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
+        while True:
+           try:
+               print("")
+               consumoresiduos2=float(input("Quanto pesa seu lixo não reciclável em gramas(g)? "))
+               break
+           except ValueError:
+               print("")
+               print("Erro: Digite um valor númerico válido para resíduo.")
+        print("")
+        print("----------------------------------------------------------------------") 
     
-        elif ((consumoresiduos1>=consumoresiduos2*1.2) and (consumoresiduos1<=consumoresiduos2*1.5)):
-            residuos = "MODERADA SUSTENTABILIDADE"
-            pontos2 = 5
-            # Salva os dados no banco de dados
-            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
-            print("Seu nível no DESAFIO 2 - RESÍDUOS é: MODERADA SUSTENTABILIDADE")
-        elif (consumoresiduos1<consumoresiduos2*0.8):
-            residuos = "BAIXA SUSTENTABILIDADE"
-            pontos2 = 2
-            # Salva os dados no banco de dados
-            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
-            print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
-        else:
-            residuos = "BAIXA SUSTENTABILIDADE"
-            pontos2 = 2
-            # Salva os dados no banco de dados
-            Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora )
-            print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
+    if (consumoresiduos1>consumoresiduos2*1.5):
+        resíduos = "ALTA SUSTENTABILIDADE"
+        pontos2 = 10
+        print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
+    
+<<<<<<< Updated upstream
+    elif ((consumoresiduos1>=consumoresiduos2*1.2) and (consumoresiduos1<=consumoresiduos2*1.5)):
+        resíduos = "MODERADA SUSTENTABILIDADE"
+        pontos2 = 5
+        print("Seu nível no DESAFIO 2 - RESÍDUOS é: MODERADA SUSTENTABILIDADE")
+    elif (consumoresiduos1<consumoresiduos2*0.8):
+        resíduos = "BAIXA SUSTENTABILIDADE"
+        pontos2 = 2
+        print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
+    else:
+        resíduos = "BAIXA SUSTENTABILIDADE"
+        pontos2 = 2
+        print("Seu nível no DESAFIO 2 - RESÍDUOS é: BAIXA SUSTENTABILIDADE")
     
         # Opção de continuar para o próximo desafio ou voltar para a tela de menu
         print("----------------------------------------------------------------------")
