@@ -236,8 +236,14 @@ def Tela_agua_residuos():
         pontos1 = 2
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         print("Seu nível no DESAFIO 1 - ÁGUA é: BAIXA SUSTENTABILIDADE ")
     
+=======
+        # Salva os dados no banco de dados
+        Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora, consumoagua )
+        print("Seu nível no DESAFIO 1 - ÁGUA é: BAIXA SUSTENTABILIDADE")
+>>>>>>> Stashed changes
 =======
         # Salva os dados no banco de dados
         Salvar_no_Banco(usuario_logado, 1, agua, pontos1, "Concluido", data_agora, consumoagua )

@@ -12,6 +12,7 @@ def Tela_historico():
     
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     console = Console()
     
     t = Table(title = "\nHistórico de Sustentabilidade")
@@ -26,6 +27,8 @@ def Tela_historico():
     console.print(t)
     
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     
@@ -76,6 +79,9 @@ def Tela_historico():
         
        
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
