@@ -1,26 +1,34 @@
-CREATE TABLE usuario(
-	id int PRIMARY KEY AUTO_INCREMENT,
-    nome varchar(50) not null,
-    email varchar(50) UNIQUE not null,
-    cpf int UNIQUE NOT null,
-    senha varchar(50) NOT null
-)
+CREATE TABLE usuario (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50),
+    email VARCHAR(50),
+    cpf VARCHAR(50),
+    senha VARCHAR(50)
+);
 
 CREATE TABLE desafios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
     descricao TEXT
 );
 
-
 CREATE TABLE respostas_desafios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    id_desafio INT NOT NULL,
-    respostas VARCHAR(250),   
-    pontuacao INT,          
-    data_resposta DATE,    
-    status VARCHAR(50),     
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_desafio) REFERENCES desafios(id) ON DELETE CASCADE
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(11),
+    id_desafio INT(11),
+    respostas VARCHAR(250),
+    pontuacao INT(11),
+    data_resposta DATE,
+    status VARCHAR(50),
+    valor VARCHAR(250),
+    FOREIGN KEY (id_usuario) REFERENCES projeto_pi_usuario(id),
+    FOREIGN KEY (id_desafio) REFERENCES projeto_pi_desafios(id)
+);
+
+CREATE TABLE resultados_desafios (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(11),
+    resultado_mensal VARCHAR(250),
+    data DATE,
+    FOREIGN KEY (id_usuario) REFERENCES projeto_pi_usuario(id)
 );
