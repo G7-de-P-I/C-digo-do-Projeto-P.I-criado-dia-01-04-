@@ -1,28 +1,25 @@
-import mysql.connector
-import sys
-from rich.console import Console
-from rich.table import Table
-from datetime import datetime
-from tela_desafios import Tela_opcoes
-import os
+import mysql.connector  # Para conexão com banco de dados (ainda não usado neste trecho)
+import sys  # Para encerramento do programa com sys.exit()
+from rich.console import Console  # Biblioteca para saída formatada no terminal
+from rich.table import Table  # Para tabelas no terminal (não utilizado aqui, mas importado)
+from datetime import datetime  # Para manipulação de datas (ainda não usado aqui)
+from tela_desafios import Tela_opcoes  # Função importada de outro módulo
+import os  # Para comandos de sistema como limpar o terminal
 
+# Função para limpar o terminal, dependendo do sistema operacional
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+# Pontuação padrão atribuída para as 4 fases do desafio
+pontos1 = 10
+pontos2 = 10
+pontos3 = 10
+pontos4 = 10
 
 
-
-pontos1=10
-pontos2=10
-pontos3=10
-pontos4=10
-
-
-
+# Cria uma lista com os níveis de sustentabilidade e sua pontuação correspondente
 def criar_lista_sustentabilidade():
-    """Cria uma lista dos ní­veis de sustentabilidade."""
-
     sustentabilidade = [
         "Alta: 30 - 40  (10pts)",
         "Moderada: 20 - 29 (5pts)",
@@ -31,35 +28,30 @@ def criar_lista_sustentabilidade():
     return sustentabilidade
 
 
-
+# Exibe a lista de sustentabilidade no terminal
 def exibir_lista_sustentabilidade(lista):
-    """Exibe a lista de sustentabilidade."""
-    print("Ní­veis de Sustentabilidade:")
+    print("Níveis de Sustentabilidade:")
     for item in lista:
         print(f"- {item}")
         
-        
 
+# Tela inicial do programa, com mensagem de boas-vindas e menu de opções
 def Tela_principal():
-
-    """Exibe a tela de boas-vindas e processa a entrada do usuário."""
     print(" ")
     print("BEM VINDO AO SUSTENTAÍ")
     print("")
-    print("A sustentabilidade começa com pequenas escolhas diárias que fazem uma grande diferença no mundo. O Sustentaí­ é um projeto criado para inspirar e desafiar você a viver de forma mais sustentável.")
-    
-    print("")
+    print("A sustentabilidade começa com pequenas escolhas diárias que fazem uma grande diferença no mundo. O Sustentaí é um projeto criado para inspirar e desafiar você a viver de forma mais sustentável.")
     print("------------------------------------------------------------------")
-    print("DESAFIO SUSTENTAÍ­")
+    print("DESAFIO SUSTENTAÍ")
     print("------------------------------------------------------------------")
-    print("")
-    print("Descubra seu ní­vel de sustentabilidade! Participe do nosso desafio e descubra como suas ações impactam o planeta. A cada passo, você aprende, evolui e contribui para um futuro mais verde e consciente. Está pronto para fazer a diferença? Vamos juntos nessa jornada sustentável!")
+    print("Descubra seu nível de sustentabilidade! Participe do nosso desafio e descubra como suas ações impactam o planeta.")
     print("\n1. COMO FUNCIONA")
     print("2. COMEÇAR")
     print("3. CADASTRAR")
 
     opcao = input("\nDigite uma opção (1 - 2 ou 3): ")
 
+    # Direciona para a função correta com base na escolha do usuário
     if opcao == "1":
         limpar_terminal()
         Exibir_como_funciona()
@@ -73,63 +65,53 @@ def Tela_principal():
         Tela_cadastro()
     else:
         print("Opção inválida. Tente novamente.")
-        Tela_principal()  # Chama a funÃ§Ã£o novamente para repetir o processo
+        Tela_principal()  # Chama a função novamente para repetir o menu
 
 
-
+# Explicação detalhada de como funciona o desafio de sustentabilidade
 def Exibir_como_funciona():
-
-    
-    """Exibe o texto explicando como o Sustentaí­ funciona."""
-    
-    print("")
     print("------------------------------------------------------------------")
     print("COMO FUNCIONA:")
     print("------------------------------------------------------------------")
-    print("")
-    print("O Desafio se baseia em 4 fases (Consumo de água, energia, resí­duos e transporte). Para cada fase há uma classificação podendo ser (Alta, Moderada e Baixa Sustentabilidade), com uma determinada pontuação para cada (Alta = 10; Moderada = 5; Baixa = 2). Ao final do Desafio diário somaremos cada classificação de cada fase, obtendo uma pontuação que determinará seu ní­vel total de sustentabilidade diário e ao final de cada mês você receberá seu nível de sustentabilidade mensal. Observe abaixo a ponderação para seu ní­vel total de sustentabilidade:")
-    print("")
+    print("O Desafio se baseia em 4 fases (Consumo de água, energia, resíduos e transporte)...")
 
-    
     lista_sustentabilidade = criar_lista_sustentabilidade()
     exibir_lista_sustentabilidade(lista_sustentabilidade)
 
     input("\nPara voltar ao menu principal pressione Enter")
     limpar_terminal()
     Tela_principal()
-            
+
+
+# Exibe dicas práticas de sustentabilidade para o usuário
 def Tela_de_dicas():
     print("------------------------------------------------------------------------------")
     print("\nTELA DE DICAS\n")
     print("------------------------------------------------------------------------------")
-    print("\n  Dica 1: Reduza o consumo de plástico, principalmente em embalagens")
-    print("de produtos frequentes na sua rotina, como: alimentos, bebidas e cosméticos")
-    print("  Dica 2: Economize energia elétrica apagando as luzes em comodos não utilizados")
-    print("utilizados no momento e desligando eletrodomésticos de uso simplório")
+    print("\n  Dica 1: Reduza o consumo de plástico...")
+    print("  Dica 2: Economize energia elétrica...")
     print("  Dica 3: Separe seu lixo para reciclagem")
-    print("  Dica 4: Faça o uso de mais transportes públicos e evite pegar Táxi/Uber")
-    print("em curtas distâncias")
-    print("  Dica 5: Reveja seu consumo de água, verificando se não há vazamentos em")
-    print("sua casa/apartamento")
+    print("  Dica 4: Use mais transporte público")
+    print("  Dica 5: Reveja seu consumo de água...")
     print(" ")
-    
-    
+
+    # Menu de navegação: ir para opções ou voltar ao menu principal
     while True: 
         print("Digite para continuar: (1) Tela de Opções ou (2) Menu Principal")
         print("")
-        opcao20= input("Digite a opção desejada: ")
-        if opcao20=="1":
+        opcao20 = input("Digite a opção desejada: ")
+        if opcao20 == "1":
             limpar_terminal()
             Tela_opcoes()
-        elif opcao20=="2":
+        elif opcao20 == "2":
             limpar_terminal()
             from tela_menu import Tela_menu
             Tela_menu()
         else:
             print("Opção inválida. Digite uma opção válida!")
             
-    #tela de saída e dicas
 
+# Tela final do programa, exibida ao usuário ao encerrar o desafio
 def Tela_de_saida():
     print("-------------------------------------------------------------------------------")
     print("\n TELA DE SAÍDA\n")
@@ -137,11 +119,6 @@ def Tela_de_saida():
     print("\n Parabéns por ter terminado nosso programa!")
     print("Esperamos que tenha gostado :)")
     print(" Até a próxima!")
-    print(" ")
-    print(" ")
-    print("\n**Esse progranma foi idealizado e construído pelos alunos de")
-    print("engenharia de software, Grupo G7, da turma 103. Puc-Campinas.**")
-    print(" ")
-    print(" ")
+    print("\n**Esse programa foi idealizado e construído pelos alunos de engenharia de software, Grupo G7, da turma 103. PUC-Campinas.**")
     print("******************************************************************************")
     sys.exit()
