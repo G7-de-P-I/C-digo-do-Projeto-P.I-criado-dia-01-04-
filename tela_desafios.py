@@ -25,7 +25,7 @@ def Tela_desafio(usuario_logado):
 
     todos_concluidos = all(desafio['status'].upper() == "CONCLUIDO" for desafio in desafios)
 
-    if todos_concluidos:
+    if not todos_concluidos:
         print("\n✅ Você já concluiu todos os desafios!")
         input("Pressione ENTER para continuar...")
         Tela_opcoes(usuario_logado)

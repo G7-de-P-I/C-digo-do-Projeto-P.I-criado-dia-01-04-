@@ -27,8 +27,8 @@ def Tela_historico(usuario_logado):
     
         conexao = conectar()
         cursor = conexao.cursor(dictionary=True)
-        comando = "SELECT data_resposta, pontuacao, respostas, id_desafio, valor FROM respostas_desafios WHERE id_usuario = %s ORDER BY data_resposta DESC"
-        cursor.execute(comando, (usuario_logado["id"],))
+        comando = "SELECT data_resposta, pontuacao, respostas, id_desafio, valor FROM respostas_desafios WHERE id_usuario = %s AND data_resposta = %s ORDER BY data_resposta DESC"
+        cursor.execute(comando, (usuario_logado["id"], data_desejada))
         dados = cursor.fetchall()
     
         console = Console()
