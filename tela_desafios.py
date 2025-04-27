@@ -201,17 +201,6 @@ def Tela_residuos(usuario_logado):
             print("2- Pese os sacos - Use uma balança doméstica para medir o peso de cada tipo de resíduo")
             print("3- Registre os valores - Anote a quantidade (peso) de lixo reciclável e não reciclável que você produz em um dia. ")
         
-        while True:
-           try:
-               print("")
-               consumoresiduos2=float(input("Quanto pesa seu lixo não reciclável em gramas(g)? "))
-               break
-           except ValueError:
-               print("")
-               print("Erro: Digite um valor númerico válido para resíduo.")
-        print("")
-        print("----------------------------------------------------------------------") 
-    
            # Pede para o usuario digitar o peso do seu consumo de lixo não reciclável e verifica se um valor válido foi digitado
         while True:
                 try:
