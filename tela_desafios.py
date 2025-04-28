@@ -25,7 +25,7 @@ def Tela_desafio(usuario_logado):
 
     todos_concluidos = all(desafio['status'].upper() == "CONCLUIDO" for desafio in desafios)
 
-    if not todos_concluidos:
+    if todos_concluidos:
         print("\n✅ Você já concluiu todos os desafios!")
         input("Pressione ENTER para continuar...")
         Tela_opcoes(usuario_logado)
@@ -219,7 +219,6 @@ def Tela_residuos(usuario_logado):
             pontos2 = 10
             # Salva os dados no banco de dados
             Salvar_no_Banco(usuario_logado, 2, residuos, pontos2, "Concluido", data_agora, consumoresiduos1 )
-            print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
             print("Seu nível no DESAFIO 2 - RESÍDUOS é: ALTA SUSTENTABILIDADE")
     
 
