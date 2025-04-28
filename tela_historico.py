@@ -18,7 +18,6 @@ def Tela_historico(usuario_logado):
     print("3 - DESAFIO ENERGIA")
     print("4 - DESAFIO TRANSPORTE")
     print("--------------------------------")
-    print(" ")
     
     data_desejada_string = input("Digite a data que deseja bucar suas informções de sustentabilidade!! (DD/MM/AAAA): ")
     
@@ -64,7 +63,8 @@ def Tela_historico(usuario_logado):
         print("Formato de data inválido. Use o formato DD/MM/AAAA.")
     
     while True:
-        alter_desa = input("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(1 para Água / 2 para Resíduos ...): \n")
+        print("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(1 para Água / 2 para Resíduos ...) \n Para voltar ao MENU digite 5")
+        alter_desa = input("\n")
         
         conexao = conectar()
         cursor = conexao.cursor(dictionary=True)
@@ -202,7 +202,10 @@ def Tela_historico(usuario_logado):
                 except ValueError:
                     print("\nErro: Digite um número válido.\n")
 
-    
+        elif(alter_desa == "5"):
+            limpar_terminal()
+            Tela_menu(usuario_logado)
+            
         limpar_terminal()
         print("ATUALIZADO ✅")    
         Tela_historico(usuario_logado)
