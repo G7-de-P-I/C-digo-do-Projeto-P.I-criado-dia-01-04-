@@ -5,6 +5,7 @@ from rich.table import Table  # Para tabelas no terminal (não utilizado aqui, m
 from datetime import datetime  # Para manipulação de datas (ainda não usado aqui)
 from tela_desafios import Tela_opcoes  # Função importada de outro módulo
 import os  # Para comandos de sistema como limpar o terminal
+from colorama import Fore, Style
 
 # Função para limpar o terminal, dependendo do sistema operacional
 def limpar_terminal():
@@ -41,9 +42,9 @@ def Tela_principal():
     print("BEM VINDO AO SUSTENTAÍ")
     print("")
     print("A sustentabilidade começa com pequenas escolhas diárias que fazem uma grande diferença no mundo. O Sustentaí é um projeto criado para inspirar e desafiar você a viver de forma mais sustentável.")
-    print("------------------------------------------------------------------")
-    print("DESAFIO SUSTENTAÍ")
-    print("------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
+    print(Fore.BLUE+"DESAFIO SUSTENTAÍ"+Style.BRIGHT)
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("Descubra seu nível de sustentabilidade! Participe do nosso desafio e descubra como suas ações impactam o planeta.")
     print("\n1. COMO FUNCIONA")
     print("2. COMEÇAR")
@@ -61,8 +62,14 @@ def Tela_principal():
         Tela_login()
     elif opcao == "3":
         limpar_terminal()
-        from tela_cadastro import Tela_cadastro
-        Tela_cadastro()
+        resposta = input("Deseja mesmo realizar um novo cadastro?(S/N): ")
+        
+        if(resposta == "s" or resposta == "sim" or resposta == "SIM"):
+            from tela_cadastro import Tela_cadastro
+            Tela_cadastro()
+        else:
+            limpar_terminal()
+            Tela_principal()
     else:
         print("Opção inválida. Tente novamente.")
         Tela_principal()  # Chama a função novamente para repetir o menu
@@ -70,24 +77,24 @@ def Tela_principal():
 
 # Explicação detalhada de como funciona o desafio de sustentabilidade
 def Exibir_como_funciona():
-    print("------------------------------------------------------------------")
-    print("COMO FUNCIONA:")
-    print("------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
+    print(Fore.BLUE+"COMO FUNCIONA:"+Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("O Desafio se baseia em 4 fases (Consumo de água, energia, resíduos e transporte)...")
 
     lista_sustentabilidade = criar_lista_sustentabilidade()
     exibir_lista_sustentabilidade(lista_sustentabilidade)
 
-    input("\nPara voltar ao menu principal pressione Enter")
+    input(Fore.GREEN+"\nPara voltar ao menu principal pressione Enter"+Style.RESET_ALL)
     limpar_terminal()
     Tela_principal()
 
 
 # Exibe dicas práticas de sustentabilidade para o usuário
 def Tela_de_dicas():
-    print("------------------------------------------------------------------------------")
-    print("\nTELA DE DICAS\n")
-    print("------------------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
+    print(Fore.BLUE+"\nTELA DE DICAS\n"+Style.BRIGHT)
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("\n  Dica 1: Reduza o consumo de plástico...")
     print("  Dica 2: Economize energia elétrica...")
     print("  Dica 3: Separe seu lixo para reciclagem")
@@ -113,9 +120,9 @@ def Tela_de_dicas():
 
 # Tela final do programa, exibida ao usuário ao encerrar o desafio
 def Tela_de_saida():
-    print("-------------------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("\n TELA DE SAÍDA\n")
-    print("-------------------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("\n Parabéns por ter terminado nosso programa!")
     print("Esperamos que tenha gostado :)")
     print(" Até a próxima!")

@@ -2,6 +2,7 @@ from rich.console import Console  # Biblioteca para saída estilizada no termina
 from tela_perfil import Tela_perfil  # Importa a tela de perfil
 from tela_desafios import Tela_desafio  # Importa a tela de desafios
 import os  # Biblioteca para executar comandos do sistema operacional
+from colorama import Fore, Style
 
 # Função para limpar o terminal conforme o sistema operacional
 def limpar_terminal():
@@ -10,15 +11,17 @@ def limpar_terminal():
 
 # Função principal do menu, recebe o usuário logado como parâmetro
 def Tela_menu(usuario_logado):
+    from tela_principal import Tela_principal
     from tela_historico import Tela_historico  # Importa a tela de histórico (somente quando a função é chamada)
     
     # Exibe o menu principal com as opções disponíveis
-    print("------------------------------------------------------------------")
-    print("MENU")
-    print("------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+    print(Fore.BLUE+"MENU"+Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
     print("\n1. DESAFIOS")  
     print("2. PERFIL")
     print("3. HÍSTORICO SUSTENTÁVEL")
+    print("4. SAIR")
         
     # Laço para garantir entrada válida do usuário
     while True:
@@ -39,6 +42,9 @@ def Tela_menu(usuario_logado):
             elif Telair == 3:
                 limpar_terminal()
                 Tela_historico(usuario_logado)
+            elif Telair == 4:
+                limpar_terminal()
+                Tela_principal()
             
             # Caso a opção não seja válida
             else:

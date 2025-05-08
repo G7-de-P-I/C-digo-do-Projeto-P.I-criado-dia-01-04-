@@ -1,6 +1,6 @@
 import os
 from banco import conectar  # Função para conectar ao banco de dados
-
+from colorama import Fore, Style
 
 # Limpa o terminal de acordo com o sistema operacional
 def limpar_terminal():
@@ -17,7 +17,6 @@ def Tela_login():
 
     while True:
         try:
-            print("")
             resposta = input("Possui cadastro?(SIM/NÃO): ")
             
             # Se a pessoa já tiver cadastro, segue para o login
@@ -45,13 +44,13 @@ def Tela_login():
                         if usuario_logado:
                             from tela_menu import Tela_menu
                             print("\n✅ Login realizado com sucesso!")
-                            input("\nPressione Enter para continuar...")
+                            input(Fore.GREEN+"Pressione Enter para continuar..."+Style.RESET_ALL)
                             limpar_terminal()
                             Tela_menu(usuario_logado)
                             break
                         else:
                             print("\n❌ Email ou senha incorretos!")
-                            input("\nPressione Enter para tentar novamente...")
+                            input(Fore.RED+"Pressione Enter para tentar novamente..."+Style.RESET_ALL)
 
                     except Exception as e:
                         print(f"\n⚠️ Erro ao fazer login: {e}")
@@ -67,10 +66,10 @@ def Tela_login():
             else:
                 from tela_cadastro import Tela_cadastro
                 limpar_terminal()
-                print("\n----------------------------------------------------------------")
+                print(Fore.LIGHTYELLOW_EX+"\n----------------------------------------------------------------"+Style.RESET_ALL)
                 print("REALIZE SEU CADASTRO PRIMEIRO")
                 Tela_cadastro()
 
         except ValueError as e:
             print(e)
-            print("Tente Novamente")
+            print(Fore.RED+"Tente Novamente")

@@ -1,6 +1,6 @@
 import os
 from banco import conectar
-from datetime import datetime
+from datetime import date
 
 
 def limpar_terminal():
@@ -8,32 +8,33 @@ def limpar_terminal():
     
 
 def Tela_desafio(usuario_logado):
-
+    data_hoje = date.today().isoformat()
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
     query = """
-        SELECT d.id, d.nome, COALESCE(r.status, 'NÃO CONCLUÍDO') AS status
-        FROM desafios d
-        LEFT JOIN respostas_desafios r
-            ON d.id = r.id_desafio AND r.id_usuario = %s
-        ORDER BY d.id
+    SELECT 1 FROM respostas_desafios
+    WHERE id_usuario = %s AND data_resposta = %s
+    LIMIT 1
     """
 
-    cursor.execute(query, (usuario_logado['id'],))
+    cursor.execute(query, (usuario_logado['id'], data_hoje))
     desafios = cursor.fetchall()
 
-    todos_concluidos = all(desafio['status'].upper() == "CONCLUIDO" for desafio in desafios)
+    
 
-    if todos_concluidos:
+    if desafios:
         print("\n✅ Você já concluiu todos os desafios!")
         input("Pressione ENTER para continuar...")
         Tela_opcoes(usuario_logado)
     else:
         print("\nDesafios disponíveis:")
-        for desafio in desafios:
-            print(f"{desafio['nome']}: {desafio['status'].upper()}")
-
+        print("")
+        print("1 - DESAFIO ÁGUA")
+        print("2 - DESAFIO RESÍDUOS")
+        print("3 - DESAFIO ENERGIA")
+        print("4 - DESAFIO TRANSPORTE")
+        
         input("\nPressione ENTER para começar os desafios...")
         Tela_agua(usuario_logado)       
         
@@ -42,7 +43,7 @@ def Tela_desafio(usuario_logado):
 # Função para a tela do desafio água     
 def Tela_agua(usuario_logado):
     from tela_menu import Tela_menu
-    data_agora = datetime.now()
+    data_agora = date.today().isoformat()
 
     # Explicação do desafio água
     print("----------------------------------------------------------------------")
@@ -128,7 +129,7 @@ def Tela_agua(usuario_logado):
 # Função para a tela do desafio resíduos
 def Tela_residuos(usuario_logado):
         from tela_menu import Tela_menu
-        data_agora = datetime.now()
+        data_agora = date.today().isoformat()
         limpar_terminal()
 
         # Tela de explicação do desafio resíduos
@@ -274,7 +275,7 @@ def Tela_residuos(usuario_logado):
 # Função para a tela do desafio energia      
 def Tela_energia(usuario_logado):
             from tela_menu import Tela_menu
-            data_agora = datetime.now()
+            data_agora = date.today().isoformat()
 
             # Tela de explicação do desafio energia
             print("----------------------------------------------------------------------") 
@@ -356,7 +357,7 @@ def Tela_energia(usuario_logado):
                 
 # Função para a tela desafio transporte            
 def Tela_transporte(usuario_logado): 
-    data_agora = datetime.now()
+    data_agora = date.today().isoformat()
 
     # Tela de explicação do desafio transporte
     print("----------------------------------------------------------------------")
@@ -416,6 +417,7 @@ def Tela_transporte(usuario_logado):
 
 def Tela_opcoes(usuario_logado):
     from tela_historico import Tela_historico
+    from tela_menu import Tela_menu
     print("")
     print("----------------------------------------------------------------------")
             # Nível de sustentabilidade para transporte
@@ -466,6 +468,10 @@ def Tela_opcoes(usuario_logado):
         elif(opcao10 == 4):
             limpar_terminal()
             Tela_historico(usuario_logado)
+            break
+        elif(opcao10 == 5):
+            limpar_terminal()
+            Tela_menu(usuario_logado)
             break
             
 
