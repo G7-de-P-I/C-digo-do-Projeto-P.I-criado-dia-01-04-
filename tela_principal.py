@@ -121,11 +121,10 @@ def Tela_de_dicas():
 # Tela final do programa, exibida ao usuário ao encerrar o desafio
 def Tela_de_saida():
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
-    print("\n TELA DE SAÍDA\n")
+    print("TELA DE SAÍDA")
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
-    print("\n Parabéns por ter terminado nosso programa!")
+    print("\nParabéns por ter terminado nosso programa!")
     print("Esperamos que tenha gostado :)")
-    print(" Até a próxima!")
+    print("Até a próxima!")
     print("\n**Esse programa foi idealizado e construído pelos alunos de engenharia de software, Grupo G7, da turma 103. PUC-Campinas.**")
-    print("******************************************************************************")
     sys.exit()

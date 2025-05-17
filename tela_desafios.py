@@ -1,6 +1,7 @@
 import os
 from banco import conectar
 from datetime import date
+from colorama import Fore, Style 
 
 
 def limpar_terminal():
@@ -24,7 +25,7 @@ def Tela_desafio(usuario_logado):
     
 
     if desafios:
-        print("\n✅ Você já concluiu todos os desafios!")
+        print(Fore.GREEN+"\n✅ Você já concluiu todos os desafios!"+Style.RESET_ALL)
         input("Pressione ENTER para continuar...")
         Tela_opcoes(usuario_logado)
     else:
@@ -418,8 +419,11 @@ def Tela_transporte(usuario_logado):
 def Tela_opcoes(usuario_logado):
     from tela_historico import Tela_historico
     from tela_menu import Tela_menu
+    from tela_mensal import Tela_mensal
+    from tela_dados import Tela_dados
+    from tela_dia import Tela_dia
     print("")
-    print("----------------------------------------------------------------------")
+    print("---------------------------------------------------------------------")
             # Nível de sustentabilidade para transporte
                 
      
@@ -496,226 +500,3 @@ def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, dat
             cursor.close()
         if conexao:
             conexao.close()
-            
-
-# Função para a tela de sustentabilidade mensal      
-def Tela_mensal(usuario_logado):
-    from datetime import date
-
-
-    print("----------------------------------------------------------------------")
-    print("SUSTENTABILIDADE MENSAL")
-    print("----------------------------------------------------------------------\n")
-
- # Conectar ao banco
-    conexao = conectar()
-    cursor = conexao.cursor()
-    id_usuario = usuario_logado["id"]
-
-    # Verificar quantos registros mensais já existem para esse usuário
-    comando_verificar = """
-    SELECT COUNT(*) FROM resultados_desafios
-    WHERE id_usuario = %s
-    """
-    cursor.execute(comando_verificar, (id_usuario,))
-    quantidade_registros = cursor.fetchone()[0]
-
-    # Selecionar as pontuações diárias
-    comando_pontuacoes = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
-    cursor.execute(comando_pontuacoes, (id_usuario,))
-    resultado = cursor.fetchall()
-
-    # Lista com os pontos dos 30 dias
-    desafios_diarios = [sum(linha) for linha in resultado]
-
-    # Só continua se tiver 30 respostas
-    if len(desafios_diarios) >= 30 and quantidade_registros == 0:
-        # Calcular média mensal
-            Smensal = sum(desafios_diarios) / 30
-
-    # Mostrar nível (opcional)
-            if 30 <= Smensal <= 40:
-                nivel = "ALTA"
-            elif 20 <= Smensal < 30:
-                nivel = "MODERADA"
-            else:
-                nivel = "BAIXA"
-
-            print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
-            print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
-
-    # Inserir na tabela de resultados mensais
-            comando_inserir = """
-            INSERT INTO resultados_desafios (id_usuario, resultado_mensal, data)
-            VALUES (%s, %s, %s)
-            """
-            data_atual = date.today()
-            cursor.execute(comando_inserir, (id_usuario, Smensal, data_atual))
-            conexao.commit()
-    else:
-            print("Ainda não há 30 dias de resultados ou já foi registrado um resultado mensal.")
-
-    # Fechar conexão
-    cursor.close()
-    conexao.close()
-
-    # Menu de opções
-    while True:
-        print("----------------------------------------------------------------------")
-        print("Escolha uma opção:")
-        print("1 - MENU DE OPÇÕES")
-        print("2 - Sair")
-        print("----------------------------------------------------------------------")
-        opcao = input("Digite a opção desejada: ")
-
-
-        if opcao == "1":
-            limpar_terminal()
-            Tela_opcoes(usuario_logado)
-            break
-
-        elif opcao == "2":
-            limpar_terminal()
-            print("\nAté mais!")
-            break
-
-        else:
-            print("Opção inválida. Tente novamente.")
-            
-
-#------------------------------------
-
-def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
-    from tela_principal import Tela_de_dicas
-    from tela_principal import Tela_principal
-    from tela_principal import Tela_de_saida
-     
-    while True:
-        print("----------------------------------------------------------------------")
-        print("\nPARABÉNS, VOCÊ CONCLUIU O DESAFIO SUSTENTAÍ!\n")
-        print("\nAgora você poderá saber o quão sustentável você é!\n")
-     
-        variavel_do_nivel=(pontos1+pontos2+pontos3+pontos4)
-        
-        if (variavel_do_nivel>=30) and (variavel_do_nivel<=40):
-            print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É: ALTO!")
-            print("----------------------------------------------------------------------")
-            
-        elif (variavel_do_nivel>=20) and (variavel_do_nivel<=29):
-            print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É MODERADO!")
-            print("----------------------------------------------------------------------")
-            
-        else:
-            print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É BAIXO!")
-            print("----------------------------------------------------------------------")
-            print("")
-            print("Mas fique tranquilo(a), vamos te ajudar a melhorar...")
-            
-        print("\nEscolha uma opção:")
-        print("1 - MENU OPÇÕES")
-        print("2 - OBTER DICAS")
-        print("3 - MENU PRINCIPAL")
-        print("4 - SAIR")
-        
-        opcao = int(input("Digite a opção desejada: "))
-        
-        if opcao == 1:
-            limpar_terminal()
-            Tela_opcoes(usuario_logado)  
-            
-        elif opcao == 2:
-            limpar_terminal()
-            Tela_de_dicas()
-    
-        elif opcao == 3: 
-            limpar_terminal()
-            Tela_principal(usuario_logado)
-            
-        elif opcao == 4:
-            limpar_terminal()
-            Tela_de_saida(usuario_logado)
-            
-            break
-        else:
-            print("\nOpção inválida! Digite uma opção válida!")
-            
-            
-            
-            
-            
-def Tela_dados(usuario_logado, pontos1, pontos2, pontos3, pontos4):
-        from tela_principal import Tela_de_dicas
-        from tela_principal import Tela_de_saida
-        
-        conexao = conectar()
-        cursor = conexao.cursor()
-    
-        comando = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
-    
-        cursor.execute(comando, (usuario_logado["id"],))
-        resultado = cursor.fetchall()
-    
-        cursor.close()
-        conexao.close()
-
-        
-        desafios_diarios = [sum(linha) for linha in resultado]
-        
-        total_pontos = pontos1 + pontos2 + pontos3 + pontos4 
-        if total_pontos > 0:
-            porcentagem1 = (pontos1 / total_pontos) * 100
-            porcentagem2 = (pontos2 / total_pontos) * 100
-            porcentagem3 = (pontos3 / total_pontos) * 100
-            porcentagem4 = (pontos4 / total_pontos) * 100
-        else:
-            porcentagem1 = porcentagem2 = porcentagem3 = porcentagem4 = 0
-            
-        print("----------------------------------------------------------------------")
-        print(" ")
-        print("LEVANTAMENTO DE DADOS DIÁRIO")
-        print("----------------------------------------------------------------------")
-        print(" ")
-        print("")
-        print("Vamos ver detalhes da sua performance diária...")
-        print("\nAgora você poderá saber o quão sustentável você é e onde pode melhorar, caso necessário!")
-        print("Nível de sustentabilidade (diário) de acordo com cada desafio: ")
-        print(" ")
-        print(f"\nDesafio 1: {pontos1} pontos")
-        print(f"\nDesafio 2: {pontos2} pontos")
-        print(f"\nDesafio 3: {pontos3} pontos")
-        print(f"\nDesafio 4: {pontos4} pontos")
-        print(" ")
-        print("\nDistribuição percentual dos pontos:")
-        print(" ")
-        print(f"\nDesafio 1: {porcentagem1:.2f}%")
-        print(f"\nDesafio 2: {porcentagem2:.2f}%")
-        print(f"\nDesafio 3: {porcentagem3:.2f}%")
-        print(f"\nDesafio 4: {porcentagem4:.2f}%")
-        print(" ")
-        
-        while True:
-            print("\nEscolha uma opção:")
-            print("1 - MENU OPCÕES")
-            print("2 - DICAS")
-            print("3 - Sair")
-            opcao9 = int(input("\nDigite a opção desejada: "))
-        
-            if opcao9 == 1:
-                limpar_terminal()
-                Tela_opcoes(usuario_logado)
-            
-            elif opcao9==2:
-                limpar_terminal()
-                Tela_de_dicas(usuario_logado)
-            
-            elif opcao9==3:
-                print("\nVocê encerrou o programa. Até mais!")
-                limpar_terminal()
-                Tela_de_saida()
-            
-            else:
-                print("\nOpção inválida! Tente novamente.")
-

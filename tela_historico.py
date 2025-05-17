@@ -11,23 +11,26 @@ def limpar_terminal():
 def Tela_historico(usuario_logado):
     from tela_menu import Tela_menu
     from colorama import Fore, Style
+
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+    print(Fore.BLUE+"TELA HISTÓRICO"+Style.RESET_ALL)
         
-    print("--------------------------------")
     print("1 - DESAFIO ÁGUA")
     print("2 - DESAFIO RESÍDUOS")
     print("3 - DESAFIO ENERGIA")
     print("4 - DESAFIO TRANSPORTE")
-    print("--------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+    
     
     print("\n1- Voltar para o Menu")
     print("2- Consultar resultado em determinada data")
-    resposta = input(Fore.RED +"Escreva qual das opções você deseja?: "+ Style.RESET_ALL)
+    resposta = input(Fore.RED +"\nEscreva qual das opções você deseja?: "+ Style.RESET_ALL)
     
     if(resposta == "1"):
         limpar_terminal()
         Tela_menu(usuario_logado)
     else:
-        data_desejada_string = input("Digite a data que deseja bucar suas informções de sustentabilidade!! (DD/MM/AAAA): ")
+        data_desejada_string = input("\nDigite a data que deseja bucar suas informções de sustentabilidade!! (DD/MM/AAAA): ")
     
         try:
     
@@ -71,8 +74,9 @@ def Tela_historico(usuario_logado):
             print("Formato de data inválido. Use o formato DD/MM/AAAA.")
     
         while True:
-            print("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(1 para Água / 2 para Resíduos ...) \n Para voltar ao MENU digite 5")
-            alter_desa = input("\n")
+            print("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(",Fore.LIGHTYELLOW_EX+"1 para Água / 2 para Resíduos ..."+Style.RESET_ALL,")")
+            print("Para voltar ao MENU digite 5")
+            alter_desa = input("")
         
             conexao = conectar()
             cursor = conexao.cursor(dictionary=True)

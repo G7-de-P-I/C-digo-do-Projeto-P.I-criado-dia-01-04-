@@ -9,18 +9,18 @@ def limpar_terminal():
 
 # Tela de login do sistema
 def Tela_login():
-    print("----------------------------------------------------------------")
-    print("LOGIN")
-    print("----------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+    print(Fore.BLUE+"LOGIN"+Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
     print("")
     print("Olá! Para começarmos nosso desafio, precisamos te conhecer!")
 
     while True:
         try:
-            resposta = input("Possui cadastro?(SIM/NÃO): ")
+            resposta = input(Fore.RED+"Possui cadastro?(S/N): "+Style.RESET_ALL)
             
             # Se a pessoa já tiver cadastro, segue para o login
-            if(resposta == "SIM" or resposta == "sim" or resposta == "Sim"):
+            if(resposta == "S" or resposta == "s" or resposta == "Sim"):
 
                 while True:
                     email = input("\nDigite seu email: ")
