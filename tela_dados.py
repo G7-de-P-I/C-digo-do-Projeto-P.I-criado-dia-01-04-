@@ -54,8 +54,8 @@ def Tela_dados(usuario_logado, pontos1, pontos2, pontos3, pontos4):
         while True:
             print("\nEscolha uma opção:")
             print("1 - MENU OPCÕES")
-            print("2 - DICAS")
-            print("3 - Sair")
+            print("2 - OBTER DICAS")
+            print("3 - FECHAR PROGRAMA")
             opcao9 = int(input("\nDigite a opção desejada: "))
         
             if opcao9 == 1:

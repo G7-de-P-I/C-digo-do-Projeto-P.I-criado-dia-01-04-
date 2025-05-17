@@ -76,7 +76,7 @@ def Tela_mensal(usuario_logado):
         print("----------------------------------------------------------------------")
         print("Escolha uma opção:")
         print("1 - MENU DE OPÇÕES")
-        print("2 - Sair")
+        print("2 - FECHAR PROGRAMA")
         print("----------------------------------------------------------------------")
         opcao = input("Digite a opção desejada: ")
 

@@ -1,5 +1,5 @@
 import os
-
+from colorama import Fore, Style
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -12,24 +12,24 @@ def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
      
     while True:
         print("----------------------------------------------------------------------")
-        print("\nPARABÉNS, VOCÊ CONCLUIU O DESAFIO SUSTENTAÍ!\n")
-        print("\nAgora você poderá saber o quão sustentável você é!\n")
+        print(Fore.YELLOW+"\nPARABÉNS, VOCÊ CONCLUIU O DESAFIO SUSTENTAÍ!\n"+Style.RESET_ALL)
+        print("Agora você poderá saber o quão sustentável você é!\n")
      
         variavel_do_nivel=(pontos1+pontos2+pontos3+pontos4)
         
         if (variavel_do_nivel>=30) and (variavel_do_nivel<=40):
             print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É: ALTO!")
+            print("O SEU NÍVEL DE SUSTENTABILIDADE É: ", Fore.YELLOW+"ALTO!"+Style.RESET_ALL)
             print("----------------------------------------------------------------------")
             
         elif (variavel_do_nivel>=20) and (variavel_do_nivel<=29):
             print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É MODERADO!")
+            print("O SEU NÍVEL DE SUSTENTABILIDADE É: ", Fore.YELLOW+"MÉDIO!"+Style.RESET_ALL)
             print("----------------------------------------------------------------------")
             
         else:
             print("----------------------------------------------------------------------")
-            print("O SEU NÍVEL DE SUSTENTABILIDADE É BAIXO!")
+            print("O SEU NÍVEL DE SUSTENTABILIDADE É: ", Fore.YELLOW+"BAIXO!"+Style.RESET_ALL)
             print("----------------------------------------------------------------------")
             print("")
             print("Mas fique tranquilo(a), vamos te ajudar a melhorar...")
@@ -38,9 +38,9 @@ def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
         print("1 - MENU OPÇÕES")
         print("2 - OBTER DICAS")
         print("3 - MENU PRINCIPAL")
-        print("4 - SAIR")
+        print("4 - FECHAR PROGRAMA")
         
-        opcao = int(input("Digite a opção desejada: "))
+        opcao = int(input("\nDigite a opção desejada: "))
         
         if opcao == 1:
             limpar_terminal()
@@ -48,11 +48,11 @@ def Tela_dia(usuario_logado, pontos1, pontos2, pontos3, pontos4):
             
         elif opcao == 2:
             limpar_terminal()
-            Tela_de_dicas()
+            Tela_de_dicas(usuario_logado)
     
         elif opcao == 3: 
             limpar_terminal()
-            Tela_principal(usuario_logado)
+            Tela_principal()
             
         elif opcao == 4:
             limpar_terminal()

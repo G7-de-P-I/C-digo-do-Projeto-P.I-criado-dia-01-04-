@@ -423,18 +423,18 @@ def Tela_opcoes(usuario_logado):
     from tela_dados import Tela_dados
     from tela_dia import Tela_dia
     print("")
-    print("---------------------------------------------------------------------")
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+    print(Fore.BLUE+"MENU OPÇÕES"+Style.RESET_ALL)
             # Nível de sustentabilidade para transporte
-                
-     
-    print("--------------------------------------------------------------------")
+    
+    print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
     print("\nDESAFIOS CONCLUÍDOS\n")
     print("Escolha uma opção:")
     print("1 - LEVANTAMENTO DE DADOS")
     print("2 - SUSTENTABILIDADE MENSAIS")
     print("3 - SUSTENTABILIDADE DIÁRIA")
     print("4 - VER TABELA DE SUSTENTABILIDADE")
-    print("5 - VOLTAR PARA A TELA DE MENU")
+    print("5 - TELA DE MENU")
             
     conexao = conectar()
     cursor = conexao.cursor()

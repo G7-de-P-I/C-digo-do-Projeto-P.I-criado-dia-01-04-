@@ -15,21 +15,23 @@ def Tela_historico(usuario_logado):
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
     print(Fore.BLUE+"TELA HISTÓRICO"+Style.RESET_ALL)
         
-    print("1 - DESAFIO ÁGUA")
+    print("\n1 - DESAFIO ÁGUA")
     print("2 - DESAFIO RESÍDUOS")
     print("3 - DESAFIO ENERGIA")
     print("4 - DESAFIO TRANSPORTE")
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
     
     
-    print("\n1- Voltar para o Menu")
-    print("2- Consultar resultado em determinada data")
+    print("\n1 - TELA MENU")
+    print("2 - MENU OPÇÕES")
+    print("3 - Consultar resultado em determinada data")
     resposta = input(Fore.RED +"\nEscreva qual das opções você deseja?: "+ Style.RESET_ALL)
     
     if(resposta == "1"):
         limpar_terminal()
         Tela_menu(usuario_logado)
-    else:
+    if(resposta == "3"):
+        limpar_terminal()
         data_desejada_string = input("\nDigite a data que deseja bucar suas informções de sustentabilidade!! (DD/MM/AAAA): ")
     
         try:
@@ -74,9 +76,9 @@ def Tela_historico(usuario_logado):
             print("Formato de data inválido. Use o formato DD/MM/AAAA.")
     
         while True:
-            print("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(",Fore.LIGHTYELLOW_EX+"1 para Água / 2 para Resíduos ..."+Style.RESET_ALL,")")
-            print("Para voltar ao MENU digite 5")
-            alter_desa = input("")
+            print("\nPara ", Fore.RED+"alterar"+Style.RESET_ALL ,"o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio(",Fore.LIGHTYELLOW_EX+"1 para Água / 2 para Resíduos ..."+Style.RESET_ALL,")")
+            print("Para", Fore.RED+" voltar "+Style.RESET_ALL, "ao MENU digite 5...")
+            alter_desa = input("Digite o que deseja:...")
         
             conexao = conectar()
             cursor = conexao.cursor(dictionary=True)
@@ -181,7 +183,7 @@ def Tela_historico(usuario_logado):
                 print("3 - Uso exclusivo e privado (veículo próprio)")
                 print("")
     
-    # Pede para o usuário digitar o seu transporte mais utilizado no dia atual e verifica se um valor válido foi digitado
+                # Pede para o usuário digitar o seu transporte mais utilizado no dia atual e verifica se um valor válido foi digitado
                 while True:
                     try:
                         meiotransporte = int(input("Digite uma das opções: "))
@@ -214,10 +216,15 @@ def Tela_historico(usuario_logado):
                     except ValueError:
                         print("\nErro: Digite um número válido.\n")
 
-            elif(alter_desa == "5"):
+            elif alter_desa == "5":
                 limpar_terminal()
                 Tela_menu(usuario_logado)
             
             limpar_terminal()
             print("ATUALIZADO ✅")    
             Tela_historico(usuario_logado)
+            
+    if(resposta == "2"):
+        from tela_desafios import Tela_opcoes
+        limpar_terminal()
+        Tela_opcoes(usuario_logado)

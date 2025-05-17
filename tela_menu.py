@@ -21,8 +21,8 @@ def Tela_menu(usuario_logado):
     print("\n1. DESAFIOS")  
     print("2. PERFIL")
     print("3. HÍSTORICO SUSTENTÁVEL")
-    print("4. IR PARA INÍCIO")
-    print("5. SAIR")
+    print("4. DESLOGAR")
+    print("5. FECHAR PROGRAMA")
         
     # Laço para garantir entrada válida do usuário
     while True:

@@ -31,7 +31,7 @@ def criar_lista_sustentabilidade():
 
 # Exibe a lista de sustentabilidade no terminal
 def exibir_lista_sustentabilidade(lista):
-    print("Níveis de Sustentabilidade:")
+    print("\nNíveis de Sustentabilidade:")
     for item in lista:
         print(f"- {item}")
         
@@ -62,7 +62,7 @@ def Tela_principal():
         Tela_login()
     elif opcao == "3":
         limpar_terminal()
-        resposta = input("Deseja mesmo realizar um novo cadastro?(S/N): ")
+        resposta = input(Fore.RED+"Deseja mesmo realizar um novo cadastro?(S/N): "+Style.RESET_ALL)
         
         if(resposta == "s" or resposta == "sim" or resposta == "SIM"):
             from tela_cadastro import Tela_cadastro
@@ -91,29 +91,28 @@ def Exibir_como_funciona():
 
 
 # Exibe dicas práticas de sustentabilidade para o usuário
-def Tela_de_dicas():
+def Tela_de_dicas(usuario_logado):
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
-    print(Fore.BLUE+"\nTELA DE DICAS\n"+Style.BRIGHT)
+    print(Fore.BLUE+"TELA DE DICAS"+Style.BRIGHT)
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("\n  Dica 1: Reduza o consumo de plástico...")
     print("  Dica 2: Economize energia elétrica...")
     print("  Dica 3: Separe seu lixo para reciclagem")
     print("  Dica 4: Use mais transporte público")
     print("  Dica 5: Reveja seu consumo de água...")
-    print(" ")
 
     # Menu de navegação: ir para opções ou voltar ao menu principal
     while True: 
-        print("Digite para continuar: (1) Tela de Opções ou (2) Menu Principal")
-        print("")
-        opcao20 = input("Digite a opção desejada: ")
+        print("\n1 - MENU DE OPÇÕES")
+        print("2 - MENU PRINCIPAL")
+        opcao20 = input("\nDigite a opção desejada: ")
         if opcao20 == "1":
             limpar_terminal()
-            Tela_opcoes()
+            Tela_opcoes(usuario_logado)
         elif opcao20 == "2":
             limpar_terminal()
             from tela_menu import Tela_menu
-            Tela_menu()
+            Tela_menu(usuario_logado)
         else:
             print("Opção inválida. Digite uma opção válida!")
             
