@@ -11,6 +11,9 @@ def Tela_mensal(usuario_logado):
     from datetime import date
     from tela_desafios import Tela_opcoes
     from criptografia import Criptografar_Mensagem
+    from descriptografia import Descriptografar_mensagem
+    
+
 
 
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
@@ -21,6 +24,19 @@ def Tela_mensal(usuario_logado):
     conexao = conectar()
     cursor = conexao.cursor()
     id_usuario = usuario_logado["id"]
+    
+    
+    comando_verificar_existente = """
+                SELECT 1 FROM resultados_desafios
+                WHERE id_usuario = %s AND EXTRACT(YEAR FROM data) = %s AND EXTRACT(MONTH FROM data) = %s
+                LIMIT 1
+            """
+    hoje = date.today()
+    cursor.execute(comando_verificar_existente, (id_usuario, hoje.year, hoje.month))
+    resultado_existente = cursor.fetchone()
+
+
+#==============================================================================================
 
     # Verificar quantos registros mensais já existem para esse usuário
     comando_verificar_dias = """
@@ -33,40 +49,61 @@ def Tela_mensal(usuario_logado):
                             
     cursor.execute(comando_verificar_dias, (id_usuario,))
     quantidade_registros = cursor.fetchone()
+
+
+    comando_mensagem_criptografada = """SELECT resultado_mensal from resultados_desafios 
+                                        WHERE id_usuario = %s;"""
+                                        
+    cursor.execute(comando_mensagem_criptografada, (id_usuario,))
+    resultado = cursor.fetchone()
     
-    #pega o resultado de dias que tem de registros
-    total_dias = quantidade_registros[0]
+    if resultado[0]:
+        mensagem_criptografada = resultado[0]
+        descriptografada = Descriptografar_mensagem(mensagem_criptografada)
+    else:
+        descriptografada = "Sem dados"
+
+
     #pega a soma dos registros feito no período de 30 dias
     pontuacao_mes = quantidade_registros[1]
-    
-
-
-
-        # Calcular média mensal
+        
+    # Calcular média mensal
     Smensal = float(pontuacao_mes) / 30
 
-    # Mostrar nível (opcional)
+        # Mostrar nível
     if 30 <= Smensal <= 40:
             nivel = "ALTA"
             criptografado = Criptografar_Mensagem(nivel)
+            
     elif 20 <= Smensal < 30:
             nivel = "MODERADA"
             criptografado = Criptografar_Mensagem(nivel)
     else:
             nivel = "BAIXA"
             criptografado = Criptografar_Mensagem(nivel)
+    
+    
+    if resultado_existente:
+        print("pronto")
+        
+        print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
+        print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {descriptografada}!\n")
+        print("\nA média funciona em função de 30 dias, \nfaça esses desafios ao longo deste período e \nentão quem sabe não recebe um pontuação maior!!!")
+        
+    else:
 
-    print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
-    print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
+        print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
+        print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
 
-    # Inserir na tabela de resultados mensais
-    comando_inserir = """
-            INSERT INTO resultados_desafios (id_usuario, resultado_mensal, data)
-            VALUES (%s, %s, %s)
-            """
-    data_atual = date.today()
-    cursor.execute(comando_inserir, (id_usuario, criptografado, data_atual))
-    conexao.commit()
+        # Inserir na tabela de resultados mensais
+        comando_inserir = """
+                INSERT INTO resultados_desafios (id_usuario, resultado_mensal, data)
+                VALUES (%s, %s, %s)
+                """
+                
+        data_atual = date.today()
+        cursor.execute(comando_inserir, (id_usuario, criptografado, data_atual))
+        conexao.commit()
 
     # Fechar conexão
     cursor.close()

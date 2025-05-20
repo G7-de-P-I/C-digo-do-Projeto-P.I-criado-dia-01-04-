@@ -1,4 +1,4 @@
-def descriptografar_mensagem(texto_criptografado):
+def Descriptografar_mensagem(texto_criptografado):
     # Alfabeto com '#' como 26
     alfabeto = 'abcdefghijklmnopqrstuvwxyz#'
 
