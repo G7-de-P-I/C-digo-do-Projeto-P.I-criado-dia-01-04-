@@ -10,6 +10,7 @@ def limpar_terminal():
 def Tela_mensal(usuario_logado):
     from datetime import date
     from tela_desafios import Tela_opcoes
+    from criptografia import Criptografar_Mensagem
 
 
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
@@ -40,32 +41,32 @@ def Tela_mensal(usuario_logado):
     
 
 
-    # Só continua se tiver 30 respostas
-    if total_dias == 30:
+
         # Calcular média mensal
-            Smensal = sum(pontuacao_mes) / 30
+    Smensal = float(pontuacao_mes) / 30
 
     # Mostrar nível (opcional)
-            if 30 <= Smensal <= 40:
-                nivel = "ALTA"
-            elif 20 <= Smensal < 30:
-                nivel = "MODERADA"
-            else:
-                nivel = "BAIXA"
+    if 30 <= Smensal <= 40:
+            nivel = "ALTA"
+            criptografado = Criptografar_Mensagem(nivel)
+    elif 20 <= Smensal < 30:
+            nivel = "MODERADA"
+            criptografado = Criptografar_Mensagem(nivel)
+    else:
+            nivel = "BAIXA"
+            criptografado = Criptografar_Mensagem(nivel)
 
-            print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
-            print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
+    print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
+    print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {nivel}!\n")
 
     # Inserir na tabela de resultados mensais
-            comando_inserir = """
+    comando_inserir = """
             INSERT INTO resultados_desafios (id_usuario, resultado_mensal, data)
             VALUES (%s, %s, %s)
             """
-            data_atual = date.today()
-            cursor.execute(comando_inserir, (id_usuario, nivel, data_atual))
-            conexao.commit()
-    else:
-            print(Fore.RED+"Ainda não há 30 dias de resultados ou já foi registrado um resultado mensal."+Style.RESET_ALL)
+    data_atual = date.today()
+    cursor.execute(comando_inserir, (id_usuario, criptografado, data_atual))
+    conexao.commit()
 
     # Fechar conexão
     cursor.close()

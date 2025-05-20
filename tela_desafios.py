@@ -45,6 +45,7 @@ def Tela_desafio(usuario_logado):
 def Tela_agua(usuario_logado):
     from tela_menu import Tela_menu
     data_agora = date.today().isoformat()
+    from criptografia import criptografar_mensagem
 
     # Explicação do desafio água
     print("----------------------------------------------------------------------")
@@ -382,17 +383,17 @@ def Tela_transporte(usuario_logado):
             meiotransporte = int(input("Digite uma das opções: "))
         
             if meiotransporte == 1:
-                transporte = "Sem gasto de combustíveis fósseis"
+                transporte = "ALTA SUSTENTABILIDADE"
                 pontos4 = 10
                 print("Seu nível no DESAFIO 4 - TRANSPORTE É: ALTA SUSTENTABILIDADE")
 
             elif meiotransporte == 2:
-                transporte = "Uso misto de transporte público e privado"
+                transporte = "MEDIA SUSTENTABILIDADE"
                 pontos4 = 5
                 print("Seu nível no DESAFIO 4 - TRANSPORTE É: MODERADA SUSTENTABILIDADE")
 
             elif meiotransporte == 3:
-                transporte = "Uso exclusivo e privado"
+                transporte = "BAIXA SUSTENTABILIDADE"
                 pontos4 = 2
                 print("Seu nível no DESAFIO 4 - TRANSPORTE É: BAIXA SUSTENTABILIDADE\n")
 
