@@ -45,7 +45,6 @@ def Tela_desafio(usuario_logado):
 def Tela_agua(usuario_logado):
     from tela_menu import Tela_menu
     data_agora = date.today().isoformat()
-    from criptografia import criptografar_mensagem
 
     # Explicação do desafio água
     print("----------------------------------------------------------------------")
