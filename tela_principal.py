@@ -77,6 +77,7 @@ def Tela_principal():
 
 # Explicação detalhada de como funciona o desafio de sustentabilidade
 def Exibir_como_funciona():
+    #linha amarela
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print(Fore.BLUE+"COMO FUNCIONA:"+Style.RESET_ALL)
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
@@ -119,6 +120,7 @@ def Tela_de_dicas(usuario_logado):
 
 # Tela final do programa, exibida ao usuário ao encerrar o desafio
 def Tela_de_saida():
+    #linha amarela
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
     print("TELA DE SAÍDA")
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+ Style.RESET_ALL)
