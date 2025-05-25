@@ -36,6 +36,7 @@ def Tela_perfil(usuario_logado):
     if usuario_logado:
         # Exibe uma saudação personalizada com o nome do usuário
         print(f"\nOlá {usuario_logado['nome']}, aqui estão algumas informações que podem ser úteis para você!!")
+        # print("\nNível sustentável de hoje: ...\n")
         
         # Mostra um espaço reservado para o "nível sustentável de hoje" 
         print("\nNível sustentável de hoje: ...\n")
@@ -45,6 +46,7 @@ def Tela_perfil(usuario_logado):
         print(f"Nome: {usuario_logado['nome']}")
         print(f"E-mail: {usuario_logado['email']}")
         print(f"CPF: {usuario_logado['cpf']}")
+        input(Fore.GREEN+"\nPara VOLTAR pressione Enter"+Style.RESET_ALL)
         
         # Aguarda o usuário pressionar Enter para retornar
         input("\nPara VOLTAR pressione Enter")
