@@ -61,9 +61,9 @@ def Tela_login():
                             cursor.close()
                         if conexao:
                             conexao.close()
-
+                
             # Se não tiver cadastro, redireciona para a tela de cadastro
-            else:
+            elif(resposta == "N" or resposta == "n" or resposta == "Não" or resposta == "nao"):
                 from tela_cadastro import Tela_cadastro
                 limpar_terminal()
                 print(Fore.LIGHTYELLOW_EX+"\n----------------------------------------------------------------"+Style.RESET_ALL)
