@@ -16,11 +16,9 @@ def Tela_historico(usuario_logado):
     
     # Exibe título e cabeçalho da tela com cores
     print(Fore.LIGHTYELLOW_EX + "------------------------------------------------------------------" + Style.RESET_ALL)
-    print(Fore.BLUE + "TELA HISTÓRICO" + Style.RESET_ALL)
+    print(Fore.BLUE + "TELA HISTÓRICO\n" + Style.RESET_ALL)
     
-    # Menu inicial com opções de desafios para visualizar
-    print("\n1 - DESAFIO ÁGUA")
-    print("--------------------------------")
+    # Menu inicial com opções de desafios para visualiz
     print("1 - DESAFIO ÁGUA")
     print("2 - DESAFIO RESÍDUOS")
     print("3 - DESAFIO ENERGIA")
@@ -42,7 +40,15 @@ def Tela_historico(usuario_logado):
     if resposta == "3":
         limpar_terminal()
         # Solicita data no formato DD/MM/AAAA
-        data_desejada_string = input("\nDigite a data que deseja buscar suas informações de sustentabilidade!! (DD/MM/AAAA): ")
+        
+        
+        while True:
+            data_desejada_string = input("\nDigite a data que deseja buscar suas informações de sustentabilidade!! (DD/MM/AAAA): ")
+            
+            if( not data_desejada_string):
+                print("Digite uma data correta...")
+            else:
+                break
         
         try:
             # Converte string para objeto datetime.date
