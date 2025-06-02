@@ -1,43 +1,43 @@
-import os
-from banco import conectar
-from datetime import date
-from colorama import Fore, Style 
+import os # para limpar terminal
+from banco import conectar # para conectar BD e enviar corretamente
+from datetime import date # coletar data atual
+from colorama import Fore, Style # precisa de instalação local, serve para importar cores e destacar textos
 
-
+# def para limpar terminal 
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
     
 
+# Função principal para exibir os desafios disponíveis ao usuário
 def Tela_desafio(usuario_logado):
-    data_hoje = date.today().isoformat()
-    conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    data_hoje = date.today().isoformat()  # Obtém a data atual no formato AAAA-MM-DD
+    conexao = conectar()  # Conecta ao banco de dados
+    cursor = conexao.cursor(dictionary=True)  # Cursor com dicionário para acessar colunas por nome
 
+    # Consulta se o usuário já respondeu os desafios na data de hoje
     query = """
     SELECT 1 FROM respostas_desafios
     WHERE id_usuario = %s AND data_resposta = %s
     LIMIT 1
     """
-
     cursor.execute(query, (usuario_logado['id'], data_hoje))
-    desafios = cursor.fetchall()
+    desafios = cursor.fetchall()  # Retorna uma lista de resultados
 
-    
-
+    # Se houver resultados, significa que os desafios já foram feitos
     if desafios:
         print(Fore.GREEN+"\n✅ Você já concluiu todos os desafios!"+Style.RESET_ALL)
         input("Pressione ENTER para continuar...")
-        Tela_opcoes(usuario_logado)
+        Tela_opcoes(usuario_logado)  # Retorna ao menu de opções
     else:
+        # Caso contrário, apresenta os desafios disponíveis
         print("\nDesafios disponíveis:")
-        print("")
         print("1 - DESAFIO ÁGUA")
         print("2 - DESAFIO RESÍDUOS")
         print("3 - DESAFIO ENERGIA")
         print("4 - DESAFIO TRANSPORTE")
         
         input("\nPressione ENTER para começar os desafios...")
-        Tela_agua(usuario_logado)       
+        Tela_agua(usuario_logado)  # Inicia pelo primeiro desafio
         
         
         
@@ -417,17 +417,22 @@ def Tela_transporte(usuario_logado):
             
 
 def Tela_opcoes(usuario_logado):
+    # importando telas para chamá-las quando necessário
     from tela_historico import Tela_historico
     from tela_menu import Tela_menu
     from tela_mensal import Tela_mensal
     from tela_dados import Tela_dados
     from tela_dia import Tela_dia
-    print("")
+    # Exibe uma linha amarela decorativa
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+
+    # Título do menu em azul
     print(Fore.BLUE+"MENU OPÇÕES"+Style.RESET_ALL)
-            # Nível de sustentabilidade para transporte
-    
+
+    # Outra linha decorativa
     print(Fore.LIGHTYELLOW_EX+"------------------------------------------------------------------"+Style.RESET_ALL)
+
+    # Texto informativo
     print("\nDESAFIOS CONCLUÍDOS\n")
     print("Escolha uma opção:")
     print("1 - LEVANTAMENTO DE DADOS")
@@ -435,28 +440,31 @@ def Tela_opcoes(usuario_logado):
     print("3 - SUSTENTABILIDADE DIÁRIA")
     print("4 - VER TABELA DE SUSTENTABILIDADE")
     print("5 - TELA DE MENU")
+
             
-    conexao = conectar()
+    conexao = conectar() # conexão BD
     cursor = conexao.cursor()
-    
+    # Comando SQL para buscar todas as pontuações dos desafios respondidos por esse usuário
     comando = "SELECT pontuacao FROM respostas_desafios WHERE id_usuario = %s"
     
-    cursor.execute(comando, (usuario_logado["id"],))
-    resultado = cursor.fetchall()
+    cursor.execute(comando, (usuario_logado["id"],)) # executa comando com o ID de usuário
+    resultado = cursor.fetchall() # Retorna uma lista de tuplas com as pontuações
     
     cursor.close()
     conexao.close()
+    # Soma as pontuações diárias
     desafios_diarios = [sum(linha) for linha in resultado] 
     
     while True:
         try:
             print("")
-            opcao10 = int(input("Digite a opção escolhida: "))
-            
+            opcao10 = int(input("Digite a opção escolhida: "))  # Solicita entrada do usuário
+
         except ValueError:
             print("")
-            print("Erro: Digite uma opção válida.")
-            
+            print("Erro: Digite uma opção válida.")  # Se o valor não for um número, exibe erro
+
+        # Avalia qual opção o usuário escolheu e chama a função correspondente
         if(opcao10 == 1):
             limpar_terminal()
             Tela_dados(usuario_logado, desafios_diarios[0], desafios_diarios[1], desafios_diarios[2], desafios_diarios[3])
@@ -477,25 +485,34 @@ def Tela_opcoes(usuario_logado):
             limpar_terminal()
             Tela_menu(usuario_logado)
             break
+
             
 
+# Salva as informações da resposta no banco de dados
 def Salvar_no_Banco(usuario_logado, id_desafio, resposta, pontuacao, status, data_resposta, valor ):
     try:
         conexao = conectar()
         cursor = conexao.cursor()
-    
-    
-        comando = "INSERT INTO respostas_desafios(id_usuario, id_desafio, respostas, pontuacao, status, data_resposta, valor) VALUES(%s, %s, %s, %s, %s, %s, %s)"
-        valores = (usuario_logado['id'], id_desafio, resposta, pontuacao, status, data_resposta, valor)
+        
+        # Comando SQL para inserir os dados da resposta
+        comando = """
+        INSERT INTO respostas_desafios(
+            id_usuario, id_desafio, respostas, pontuacao, status, data_resposta, valor
+        ) VALUES(%s, %s, %s, %s, %s, %s, %s)
+        """
+        valores = (
+            usuario_logado['id'], id_desafio, resposta, pontuacao, status, data_resposta, valor
+        )
     
         cursor.execute(comando, valores)
-        conexao.commit()
+        conexao.commit()  # Salva no banco
         print("✅ Resposta salva com sucesso!")
-        
+
     except Exception as e:
-        print(f"⚠️  Erro ao salvar resposta: {e}")
-        
+        print(f"⚠️  Erro ao salvar resposta: {e}")  # Trata exceções em caso de erro
+
     finally:
+        # Fecha o cursor e a conexão, se estiverem abertos
         if cursor:
             cursor.close()
         if conexao:
