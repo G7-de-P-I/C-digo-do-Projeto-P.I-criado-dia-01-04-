@@ -84,7 +84,7 @@ def Tela_mensal(usuario_logado):
     
     
     if resultado_existente:
-        print("pronto")
+        
         
         print(f"Sua média de pontos mensal foi: {Smensal:.2f}")
         print(f"NÍVEL DE SUSTENTABILIDADE MENSAL: {descriptografada}!\n")

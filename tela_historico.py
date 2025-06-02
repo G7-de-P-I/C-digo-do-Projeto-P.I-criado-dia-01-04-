@@ -3,7 +3,7 @@ from datetime import datetime             # Para manipulação e conversão de d
 from rich.console import Console          # Console para imprimir saída formatada no terminal
 from banco import conectar                # Função para conectar ao banco de dados
 import os                                 # Para comandos do sistema operacional, como limpar a tela
-from tela_desafios import Salvar_no_Banco # Função para salvar dados no banco, caso necessário
+from colorama import Fore, Style
 
 # Função para limpar o terminal (compatível com Windows e Unix)
 def limpar_terminal():
@@ -11,16 +11,15 @@ def limpar_terminal():
 
 # Função principal para exibir e alterar o histórico de sustentabilidade do usuário
 def Tela_historico(usuario_logado):
-    from tela_menu import Tela_menu         # Importa menu principal para navegação
+    from tela_menu import Tela_menu       # Importa menu principal para navegação
+    from tela_desafios import Tela_opcoes
     from colorama import Fore, Style        # Importa cores para impressão no terminal
     
     # Exibe título e cabeçalho da tela com cores
     print(Fore.LIGHTYELLOW_EX + "------------------------------------------------------------------" + Style.RESET_ALL)
-    print(Fore.BLUE + "TELA HISTÓRICO" + Style.RESET_ALL)
+    print(Fore.BLUE + "TELA HISTÓRICO\n" + Style.RESET_ALL)
     
-    # Menu inicial com opções de desafios para visualizar
-    print("\n1 - DESAFIO ÁGUA")
-    print("--------------------------------")
+    # Menu inicial com opções de desafios para visualiz
     print("1 - DESAFIO ÁGUA")
     print("2 - DESAFIO RESÍDUOS")
     print("3 - DESAFIO ENERGIA")
@@ -38,11 +37,23 @@ def Tela_historico(usuario_logado):
         limpar_terminal()
         Tela_menu(usuario_logado)
         
+    if resposta == "2":
+        limpar_terminal()
+        Tela_opcoes(usuario_logado)   
+        
     # Se usuário deseja consultar resultado por data
     if resposta == "3":
         limpar_terminal()
         # Solicita data no formato DD/MM/AAAA
-        data_desejada_string = input("\nDigite a data que deseja buscar suas informações de sustentabilidade!! (DD/MM/AAAA): ")
+        
+        
+        while True:
+            data_desejada_string = input("\nDigite a data que deseja buscar suas informações de sustentabilidade!! (DD/MM/AAAA): ")
+            
+            if( not data_desejada_string):
+                print(Fore.RED+"Digite uma data correta..."+Style.RESET_ALL)
+            else:
+                break
         
         try:
             # Converte string para objeto datetime.date
@@ -100,7 +111,14 @@ def Tela_historico(usuario_logado):
     while True:
         print("\nPara alterar o valor que você forneceu em cada desafio, basta digitar o número correspondente ao desafio (1 para Água / 2 para Resíduos ...)")
         print("Para voltar ao MENU digite 5...")
-        alter_desa = input("Digite o que deseja: ")
+        
+        while True:
+            alter_desa = input("\nDigite o que deseja: ")
+            if(not alter_desa):
+                print("❌ Digite um valor válido!!...")
+            else:
+                break;
+
         
         # Se usuário deseja voltar ao menu, sai do loop
         if alter_desa == "5":
@@ -193,3 +211,5 @@ def Tela_historico(usuario_logado):
                 continue
             
             cursor.execute(comando, (transporte, transporte, pontos4, usuario_logado["id"], alter_desa))
+            
+

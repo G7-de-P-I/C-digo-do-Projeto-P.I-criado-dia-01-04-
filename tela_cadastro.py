@@ -1,5 +1,12 @@
 import os
 from banco import conectar
+import re
+
+
+def validar_email(email):
+    # Expressão regular simples para validar e-mails
+    padrao = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(padrao, email) is not None
 
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -16,12 +23,17 @@ def Tela_cadastro():
     print("CADASTRO")
     print("------------------------------------------------------------------")
     
-    nome = input("\n Nome: ")
-    
     
     while True:
+        nome = input("Nome: ")
+        if(not nome):
+            print("❌ Por favor insira algum nome...")
+        else:
+            break;
+    
+    while True:        
         email = input("\nEmail: ")
-        if "@" in email and "." in email.split("@")[-1]:
+        if (validar_email(email)):
             break
         else:
             print("❌ Email inválido! Digite um email no formato correto (ex: nome@exemplo.com).")
