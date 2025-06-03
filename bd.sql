@@ -21,8 +21,8 @@ CREATE TABLE respostas_desafios (
     data_resposta DATE,
     status VARCHAR(50),
     valor VARCHAR(250),
-    FOREIGN KEY (id_usuario) REFERENCES projeto_pi_usuario(id),
-    FOREIGN KEY (id_desafio) REFERENCES projeto_pi_desafios(id)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_desafio) REFERENCES desafios(id)
 );
 
 CREATE TABLE resultados_desafios (
@@ -30,5 +30,5 @@ CREATE TABLE resultados_desafios (
     id_usuario INT(11),
     resultado_mensal VARCHAR(250),
     data DATE,
-    FOREIGN KEY (id_usuario) REFERENCES projeto_pi_usuario(id)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );

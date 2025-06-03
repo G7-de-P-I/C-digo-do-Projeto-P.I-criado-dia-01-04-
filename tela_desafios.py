@@ -371,8 +371,8 @@ def Tela_transporte(usuario_logado):
     print("")
     print("Escolha uma opção:")
     print("")
-    print("1 - Sem gasto de combustíveis fósseis (a pé, bicicleta, patinete ou outro meio)")
-    print("2 - Uso misto de transporte público e privado (ônibus, carona ou outro meio)")
+    print("1 - Sem gasto de combustíveis fósseis (transporte público, a pé, bicicleta, patinete ou outro meio)")
+    print("2 - Uso misto de transporte público e privado (carona ou outro meio)")
     print("3 - Uso exclusivo e privado (veículo próprio)")
     print("")
     

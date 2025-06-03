@@ -57,7 +57,7 @@ def Tela_mensal(usuario_logado):
     cursor.execute(comando_mensagem_criptografada, (id_usuario,))
     resultado = cursor.fetchone()
     
-    if resultado[0]:
+    if resultado and  resultado[0]:
         mensagem_criptografada = resultado[0]
         descriptografada = Descriptografar_mensagem(mensagem_criptografada)
     else:
