@@ -46,10 +46,9 @@ def Tela_perfil(usuario_logado):
         print(f"Nome: {usuario_logado['nome']}")
         print(f"E-mail: {usuario_logado['email']}")
         print(f"CPF: {usuario_logado['cpf']}")
-        input(Fore.GREEN+"\nPara VOLTAR pressione Enter"+Style.RESET_ALL)
         
         # Aguarda o usuário pressionar Enter para retornar
-        input("\nPara VOLTAR pressione Enter")
+        input(Fore.GREEN+"\nPara VOLTAR pressione Enter"+Style.RESET_ALL)
         
         # Limpa o terminal após o usuário pressionar Enter
         limpar_terminal()
